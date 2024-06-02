@@ -2,22 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/</loc>
-         <lastmod>2024-05-20</lastmod>
+         <lastmod>2024-06-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/about/</loc>
-         <lastmod>2024-05-20</lastmod>
+         <lastmod>2024-06-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/tags/</loc>
-         <lastmod>2024-05-20</lastmod>
+         <lastmod>2024-06-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Edge/</loc>
+         <lastmod>2024-06-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Feature/</loc>
+         <lastmod>2024-06-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Label/</loc>
+         <lastmod>2024-06-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/</loc>
+         <lastmod>2024-06-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Subgraph/</loc>
+         <lastmod>2024-06-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/tags/</loc>
-         <lastmod>2024-05-20</lastmod>
+         <lastmod>2024-06-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -39,25 +39,9 @@
 
 
     
-     
+    
       
     
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [
-        ["$", "$"],
-        ["\\(", "\\)"],
-      ],
-    },
-  };
-</script>
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-></script>
-
     
       
         
@@ -67,6 +51,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"consolas"}</style>
       
     
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -565,7 +551,7 @@
         
   
   <span class="md-ellipsis">
-    Graph Contrastive Learning with Augmentations(GraphCL)
+    GraphCL
   </span>
   
 
@@ -1065,23 +1051,23 @@
 <p>motivation: GNN 由于图数据的标签的稀疏性导致泛化性不好，因此需要数据增强手段来提升数据的多样性，但是由于图数据的非欧性质，我们难以设计有效的且保留标签信息的图数据增强架构；现有的图数据增强方法大多需要额外一个模型且不能保证数据增强的强度和多样性，因此作者提出了 MH-Aug 根据强度和多样性方面所需的分布生成增强样本</p>
 </li>
 <li>
-<p>主要数据增强方法: 基于 Metropolis-Hastings 算法（马尔科夫链蒙特卡洛采样）来从目标分布 $P$ 中采样出一个增强图 <img alt="MH-Aug" src="../../../assets/images/MH-Aug.png" /></p>
+<p>主要数据增强方法: 基于 Metropolis-Hastings 算法（马尔科夫链蒙特卡洛采样）来从目标分布 <span class="arithmatex">\(P\)</span> 中采样出一个增强图 <img alt="MH-Aug" src="../../../assets/images/MH-Aug.png" /></p>
 </li>
 <li>
-<p>先从一个 proposal distribution 中得到一个候选图 $\mathcal{G}^{\prime}$ : 首先从高斯分布中得到 <strong>edge removing(边移除)</strong> 和 <strong>node dropping(点去除)</strong> 的去除率，然后施加到 $\mathcal{G}^{(t)}$ 上得到 $\mathcal{G}<em _mathcal_V="\mathcal{V">{\mathcal{E}}, \mathcal{G}</em>}$ 之后合并两个增强图得到 $\mathcal{G}^{\prime}$</p>
+<p>先从一个 proposal distribution 中得到一个候选图 <span class="arithmatex">\(\mathcal{G}^{\prime}\)</span> : 首先从高斯分布中得到 <strong>edge removing(边移除)</strong> 和 <strong>node dropping(点去除)</strong> 的去除率，然后施加到 <span class="arithmatex">\(\mathcal{G}^{(t)}\)</span> 上得到 <span class="arithmatex">\(\mathcal{G}_{\mathcal{E}},\mathcal{G}_{\mathcal{V}}\)</span> 之后合并两个增强图得到 <span class="arithmatex">\(\mathcal{G}^{\prime}\)</span></p>
 </li>
 <li>
-<p>通过一个 accepting ratio $\mathcal{A}$ (MH 算法决定)来决定是否接受该增强图，如果接受，则迭代为 $\mathcal{G}^{(t + 1)}$</p>
+<p>通过一个 accepting ratio <span class="arithmatex">\(\mathcal{A}\)</span> (MH 算法决定)来决定是否接受该增强图，如果接受，则迭代为 <span class="arithmatex">\(\mathcal{G}^{(t + 1)}\)</span></p>
 </li>
 <li>
-<p>loss: $\mathcal{L}_u$ 是为了一致性，即控制增强前后的图输入模型 $f$ 的结果变化；$\mathcal{L}_h$ 是一个惩罚项，鼓励模型自信预测；$\mathcal{L}_s$ 就是一般的监督样本的交叉熵损失</p>
-<p>$$
+<p>loss: <span class="arithmatex">\(\mathcal{L}_u\)</span> 是为了一致性，即控制增强前后的图输入模型 <span class="arithmatex">\(f\)</span> 的结果变化；<span class="arithmatex">\(\mathcal{L}_h\)</span> 是一个惩罚项，鼓励模型自信预测；<span class="arithmatex">\(\mathcal{L}_s\)</span> 就是一般的监督样本的交叉熵损失</p>
+<div class="arithmatex">\[
 \begin{align}
-\mathcal{L}<em i="i">{u} &amp;= \frac{1}{|\mathcal{V}|} \sum</em>^{|\mathcal{V}|} D_{K L}\left[f\left(\mathcal{G}<em i="i">{i}^{(t)} ; \theta\right) | f\left(\mathcal{G}</em>^{(t+1)} ; \theta\right)\right] \ 
-\mathcal{L}<em i="i">{h} &amp;= \frac{1}{|\mathcal{V}|} \sum</em>^{|\mathcal{V}|}\left[-f\left(\mathcal{G}<em i="i">{i} ; \theta\right) \log \left(f\left(\mathcal{G}</em> ; \theta\right)\right)\right] \
+\mathcal{L}_{u} &amp;= \frac{1}{|\mathcal{V}|} \sum_{i}^{|\mathcal{V}|} D_{K L}\left[f\left(\mathcal{G}_{i}^{(t)} ; \theta\right) \| f\left(\mathcal{G}_{i}^{(t+1)} ; \theta\right)\right] \\ 
+\mathcal{L}_{h} &amp;= \frac{1}{|\mathcal{V}|} \sum_{i}^{|\mathcal{V}|}\left[-f\left(\mathcal{G}_{i} ; \theta\right) \log \left(f\left(\mathcal{G}_{i} ; \theta\right)\right)\right] \\
 \mathcal{L} &amp;= \mathcal{L}_s + \gamma_1\mathcal{L}_u +  \gamma_2\mathcal{L}_h
 \end{align}
-$$</p>
+\]</div>
 </li>
 <li>
 <p>方法评价: 第一次将 Metropolis-Hastings 算法用于对输入图的变体进行采样，其强度和多样性可以通过超参数来控制（strength， diversity）但是分布构造相对复杂。</p>
@@ -1187,6 +1173,12 @@ $$</p>
     
     
       <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
       
     
   </body>

@@ -39,25 +39,9 @@
 
 
     
-     
+    
       
     
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [
-        ["$", "$"],
-        ["\\(", "\\)"],
-      ],
-    },
-  };
-</script>
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-></script>
-
     
       
         
@@ -67,6 +51,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"consolas"}</style>
       
     
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -563,7 +549,7 @@
         
   
   <span class="md-ellipsis">
-    Graph Contrastive Learning with Augmentations(GraphCL)
+    GraphCL
   </span>
   
 
@@ -1068,16 +1054,16 @@
 <p>主要增强方法: <img alt="GraphENS" src="../../../assets/images/GraphENS.png" /></p>
 <ul>
 <li>
-<p>neighbor sampling：选取一个少数类节点和一个目标节点（注意这里的目标节点是所有类别的节点，因此相较于之前的方法，没有只从少数类节点中提取信息，从而保证了特征的多样性）给这两个节点构造邻居分布，之后把这两个节点输入到 GNN 后的结果进行KL散度的计算，得到混合比例 $\hat{\phi}$  ；为新节点构造一个概率分布，用于邻居采样 </p>
-<p>$$
+<p>neighbor sampling：选取一个少数类节点和一个目标节点（注意这里的目标节点是所有类别的节点，因此相较于之前的方法，没有只从少数类节点中提取信息，从而保证了特征的多样性）给这两个节点构造邻居分布，之后把这两个节点输入到 GNN 后的结果进行KL散度的计算，得到混合比例 <span class="arithmatex">\(\hat{\phi}\)</span>  ；为新节点构造一个概率分布，用于邻居采样 </p>
+<div class="arithmatex">\[
 p\left(u \mid v_{\text {mixed }}\right)=\hat{\phi} p\left(u \mid v_{\text {minor }}\right)+(1-\hat{\phi}) p\left(u \mid v_{\text {target }}\right)
-$$</p>
+\]</div>
 </li>
 <li>
-<p>saliency-based node mixing：首先作者利用反向传播计算节点的梯度 $\frac{\partial\mathcal{L}}{\partial X}$ ，将其当作特征显著性，即作者认为节点的该特征如果对模型变化的贡献程度越大，则特征显著性越强；之后利用下述公式进行特征混合，其中每一维特征的选取概率由特征显著性决定，如果越显著则混合的比率越小；另外作者还加入了目标节点的一些噪声  </p>
-<p>$$
+<p>saliency-based node mixing：首先作者利用反向传播计算节点的梯度 <span class="arithmatex">\(\frac{\partial\mathcal{L}}{\partial X}\)</span> ，将其当作特征显著性，即作者认为节点的该特征如果对模型变化的贡献程度越大，则特征显著性越强；之后利用下述公式进行特征混合，其中每一维特征的选取概率由特征显著性决定，如果越显著则混合的比率越小；另外作者还加入了目标节点的一些噪声  </p>
+<div class="arithmatex">\[
 v_{\text {mixed }}=\left(1-\Lambda_{K}\right) \odot v_{\text {minor }}+\Lambda_{K} \odot v_{\text {target }} \text {, where } \Lambda_{K}=\lambda \cdot M_{K}
-$$</p>
+\]</div>
 </li>
 </ul>
 </li>
@@ -1185,6 +1171,12 @@ $$</p>
     
     
       <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
       
     
   </body>

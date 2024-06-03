@@ -39,25 +39,9 @@
 
 
     
-     
+    
       
     
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [
-        ["$", "$"],
-        ["\\(", "\\)"],
-      ],
-    },
-  };
-</script>
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-></script>
-
     
       
         
@@ -67,6 +51,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"consolas"}</style>
       
     
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -575,7 +561,7 @@
         
   
   <span class="md-ellipsis">
-    Graph Contrastive Learning with Augmentations(GraphCL)
+    GraphCL
   </span>
   
 
@@ -1068,22 +1054,22 @@
 <p>主要数据增强方法：随机将节点特征置零，以达到 Node Dropping 的效果</p>
 <ul>
 <li>
-<p>对图的节点特征 $\mathbf{X}$ 进行 $S$ 次增强，主要方法为 DropNode：首先对于每个节点，在伯努利分布中采样，之后应用到对应的节点特征上，即将某些节点的特征置零得到 $\tilde{\mathbf{X}}$ ，即实现了节点的特征去除，之后进行 $K$ 阶的随机传播，达到结合邻居信息的效果 $\overline{\mathbf{X}} = (\sum_{k= 0}^K \frac{1}{K+1}\hat{\mathbf{A}}^k) \tilde{X}$</p>
+<p>对图的节点特征 <span class="arithmatex">\(\mathbf{X}\)</span> 进行 <span class="arithmatex">\(S\)</span> 次增强，主要方法为 DropNode：首先对于每个节点，在伯努利分布中采样，之后应用到对应的节点特征上，即将某些节点的特征置零得到 <span class="arithmatex">\(\tilde{\mathbf{X}}\)</span> ，即实现了节点的特征去除，之后进行 <span class="arithmatex">\(K\)</span> 阶的随机传播，达到结合邻居信息的效果 <span class="arithmatex">\(\overline{\mathbf{X}} = (\sum_{k= 0}^K \frac{1}{K+1}\hat{\mathbf{A}}^k) \tilde{X}\)</span></p>
 </li>
 <li>
-<p>对于增强后的 $S$ 个节点特征 $\overline{\mathbf{X}}$ ，输入到模型中进行训练，可以是MLP，也可以是GNNs，得到 $S$ 的结果 $\mathbf{Z}$</p>
+<p>对于增强后的 <span class="arithmatex">\(S\)</span> 个节点特征 <span class="arithmatex">\(\overline{\mathbf{X}}\)</span> ，输入到模型中进行训练，可以是MLP，也可以是GNNs，得到 <span class="arithmatex">\(S\)</span> 的结果 <span class="arithmatex">\(\mathbf{Z}\)</span></p>
 </li>
 <li>
 <p>优化目标：</p>
 <ul>
 <li>
-<p>consistency regularization loss: 取一个类似于平均结结果标签作为unlabelled data的标签，优化让 $S$ 个结果尽可能接近这个结果 $\mathcal{L}<em s="1">{\text {con }}=\frac{1}{S} \sum</em>^{S} \sum_{i=0}<sup _prime="\prime">{n-1}\left|\overline{\mathbf{Z}}_{i}</sup>-\widetilde{\mathbf{Z}}_{i}<sup 2="2">{(s)}\right|_{2}</sup> .$</p>
+<p>consistency regularization loss: 取一个类似于平均结结果标签作为unlabelled data的标签，优化让 <span class="arithmatex">\(S\)</span> 个结果尽可能接近这个结果 <span class="arithmatex">\(\mathcal{L}_{\text {con }}=\frac{1}{S} \sum_{s=1}^{S} \sum_{i=0}^{n-1}\left\|\overline{\mathbf{Z}}_{i}^{\prime}-\widetilde{\mathbf{Z}}_{i}^{(s)}\right\|_{2}^{2} .\)</span></p>
 </li>
 <li>
-<p>supervised loss：对于labeled节点正常求完loss之后取S个的平均$\mathcal{L}<em s="1">{\text {sup }}=-\frac{1}{S} \sum</em>^{S} \sum_{i=0}^{m-1} \mathbf{Y}<em i="i">{i}^{\top} \log \widetilde{\mathbf{Z}}</em>^{(s)}$</p>
+<p>supervised loss：对于labeled节点正常求完loss之后取S个的平均<span class="arithmatex">\(\mathcal{L}_{\text {sup }}=-\frac{1}{S} \sum_{s=1}^{S} \sum_{i=0}^{m-1} \mathbf{Y}_{i}^{\top} \log \widetilde{\mathbf{Z}}_{i}^{(s)}\)</span></p>
 </li>
 <li>
-<p>$\mathcal{L} = \mathcal{L}<em _con="{con" _text="\text">{\text {sup }} + \lambda \mathcal{L}</em>}$</p>
+<p><span class="arithmatex">\(\mathcal{L} = \mathcal{L}_{\text {sup }} + \lambda \mathcal{L}_{\text {con }}\)</span></p>
 </li>
 </ul>
 </li>
@@ -1148,13 +1134,13 @@
         
         
           
-          <a href="../GraphCL/" class="md-footer__link md-footer__link--next" aria-label="Next: Graph Contrastive Learning with Augmentations(GraphCL)">
+          <a href="../GraphCL/" class="md-footer__link md-footer__link--next" aria-label="Next: GraphCL">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Graph Contrastive Learning with Augmentations(GraphCL)
+                GraphCL
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1196,6 +1182,12 @@
     
     
       <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
       
     
   </body>

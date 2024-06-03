@@ -39,25 +39,9 @@
 
 
     
-     
+    
       
     
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [
-        ["$", "$"],
-        ["\\(", "\\)"],
-      ],
-    },
-  };
-</script>
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-></script>
-
     
       
         
@@ -67,6 +51,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"consolas"}</style>
       
     
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -565,7 +551,7 @@
         
   
   <span class="md-ellipsis">
-    Graph Contrastive Learning with Augmentations(GraphCL)
+    GraphCL
   </span>
   
 
@@ -1066,29 +1052,27 @@
 </li>
 <li>
 <p>主要增强方法: 总体上与 <a href="https://arxiv.org/pdf/2010.13902.pdf">GraphCL</a> 框架一致，包含点丢弃、边扰动、属性遮盖、子图采样等数据增强方法；只是作者设计为了可以自动选择增强手段；作者首先设定增强手段的选择池：</p>
-<p>$$
-\mathcal{A} = {\text{NodeDrop}, \text{Subgraph}, \text{EdgePert}, \text{AttrMask}, \text{Identical}}
-$$</p>
+<div class="arithmatex">\[
+\mathcal{A} = \{\text{NodeDrop}, \text{Subgraph}, \text{EdgePert}, \text{AttrMask}, \text{Identical}\}
+\]</div>
 </li>
 <li>
-<p>JOAO：优化目标：作者采用 min-max 优化，其中 $\mathbb{P}<em 1="1">{\text{prior}}$ 是所有可能的增强手段的先验分布，作者采用了均匀分布，以促进选择的多样性，鼓励更多不同的增强选择，而不是压缩到少数
-    $$
-    \begin{array}{l}
-    \min _{\theta} \quad \mathcal{L}\left(\mathrm{G}, \mathrm{A}</em>, \mathrm{~A}<em _left_mathrm_A="\left(\mathrm{A">{2}, \theta\right) \
-    \text { s.t. } \quad \mathbb{P}</em><em 2="2">{1}, \mathrm{~A}</em>\right)} \in \arg \max <em _left_mathrm_A="\left(\mathrm{A">{\mathbb{P}</em><em 2="2">{1}^{\prime}, \mathrm{A}</em>^{\prime}\right)}}\left{\mathcal{L}\left(\mathrm{G}, \mathrm{A}<em 2="2">{1}^{\prime}, \mathrm{A}</em>^{\prime}, \theta\right) -\frac{\gamma}{2} \operatorname{dist}\left(\mathbb{P}<em 1="1">{\left(\mathrm{A}</em>^{\prime}, \mathrm{A}<em _prior="{prior" _text="\text">{2}^{\prime}\right)}, \mathbb{P}</em>}\right)\right} \
-    \end{array}
-    $$
-    为了优化这一目标，作者采用交替梯度下降算法(AGD)，在上级最小化和下级最大化之间交替计算</p>
-</li>
-<li>
-<p>JOAOv2：为了解决由不同的增强对引起的扭曲特征分布导致的歪曲原始分布的问题，作者在JOAO的基础上加入了 $|\mathcal{A}|$ 个投影头，在训练过程中，一旦一个增强被采样，它只会通过并更新其相应的投影头 <img alt="JOAO" src="../../../assets/images/JOAO.png" /></p>
-<p>$$
+<p>JOAO：优化目标：作者采用 min-max 优化，其中 <span class="arithmatex">\(\mathbb{P}_{\text{prior}}\)</span> 是所有可能的增强手段的先验分布，作者采用了均匀分布，以促进选择的多样性，鼓励更多不同的增强选择，而不是压缩到少数</p>
+<div class="arithmatex">\[
 \begin{array}{l}
-\min <em 1="1">{\theta} \quad \mathcal{L}\left(\mathrm{G}, \mathrm{A}</em>, \mathrm{~A}<em _left_mathrm_A="\left(\mathrm{A">{2}, \theta, \Theta^{\prime\prime}_1, \Theta^{\prime\prime}_2\right) \
-\text { s.t. } \quad \mathbb{P}</em><em 2="2">{1}, \mathrm{A}</em>\right)} \in \arg \max <em _left_mathrm_A="\left(\mathrm{A">{\mathbb{P}</em><em 2="2">{1}^{\prime}, \mathrm{A}</em>^{\prime}\right)}}\left{\mathcal{L}\left(\mathrm{G}, \mathrm{A}<em 2="2">{1}^{\prime}, \mathrm{A}</em>^{\prime}, \theta, \Theta^{\prime\prime}<em _left_mathrm_A="\left(\mathrm{A">1, \Theta^{\prime\prime}_2\right) -\frac{\gamma}{2} \operatorname{dist}\left(\mathbb{P}</em><em 2="2">{1}^{\prime}, \mathrm{A}</em>^{\prime}\right)}, \mathbb{P}<em g__Theta_prime_prime="g_{\Theta^{\prime\prime">{\text {prior }}\right)\right} \
-\mathbb{P}</em><em _Theta_prime_prime="\Theta^{\prime\prime">1}, g</em><em _left_mathrm_A="\left(\mathrm{A">2}} = \mathbb{P}</em><em 2="2">{1}, \mathrm{A}</em>\right)}
+\min _{\theta} \quad \mathcal{L}\left(\mathrm{G}, \mathrm{A}_{1}, \mathrm{~A}_{2}, \theta\right) \\
+\text { s.t. } \quad \mathbb{P}_{\left(\mathrm{A}_{1}, \mathrm{~A}_{2}\right)} \in \arg \max _{\mathbb{P}_{\left(\mathrm{A}_{1}^{\prime}, \mathrm{A}_{2}^{\prime}\right)}}\left\{\mathcal{L}\left(\mathrm{G}, \mathrm{A}_{1}^{\prime}, \mathrm{A}_{2}^{\prime}, \theta\right) -\frac{\gamma}{2} \operatorname{dist}\left(\mathbb{P}_{\left(\mathrm{A}_{1}^{\prime}, \mathrm{A}_{2}^{\prime}\right)}, \mathbb{P}_{\text {prior }}\right)\right\} \\
 \end{array}
-$$</p>
+\]</div>
+<p>为了优化这一目标，作者采用交替梯度下降算法(AGD)，在上级最小化和下级最大化之间交替计算
+  - JOAOv2：为了解决由不同的增强对引起的扭曲特征分布导致的歪曲原始分布的问题，作者在JOAO的基础上加入了 <span class="arithmatex">\(|\mathcal{A}|\)</span> 个投影头，在训练过程中，一旦一个增强被采样，它只会通过并更新其相应的投影头 <img alt="JOAO" src="../../../assets/images/JOAO.png" /></p>
+<div class="arithmatex">\[
+\begin{array}{l}
+\min _{\theta} \quad \mathcal{L}\left(\mathrm{G}, \mathrm{A}_{1}, \mathrm{~A}_{2}, \theta, \Theta^{\prime\prime}_1, \Theta^{\prime\prime}_2\right) \\
+\text { s.t. } \quad \mathbb{P}_{\left(\mathrm{A}_{1}, \mathrm{A}_{2}\right)} \in \arg \max _{\mathbb{P}_{\left(\mathrm{A}_{1}^{\prime}, \mathrm{A}_{2}^{\prime}\right)}}\left\{\mathcal{L}\left(\mathrm{G}, \mathrm{A}_{1}^{\prime}, \mathrm{A}_{2}^{\prime}, \theta, \Theta^{\prime\prime}_1, \Theta^{\prime\prime}_2\right) -\frac{\gamma}{2} \operatorname{dist}\left(\mathbb{P}_{\left(\mathrm{A}_{1}^{\prime}, \mathrm{A}_{2}^{\prime}\right)}, \mathbb{P}_{\text {prior }}\right)\right\} \\
+\mathbb{P}_{g_{\Theta^{\prime\prime}_1}, g_{\Theta^{\prime\prime}_2}} = \mathbb{P}_{\left(\mathrm{A}_{1}, \mathrm{A}_{2}\right)}
+\end{array}
+\]</div>
 </li>
 <li>
 <p>方法评价: 在对图数据进行对比学习时自动进行增强选择的方法，从而免于试验和错误，经验性的特别规则，或任何基于标记数据的验证，实现了自适应的、自动的、动态的选择增强手段；但是作者为了减小计算复杂度，在优化目标时采用的AGD算法，只是一种近似启发式算法，而没有找到一种更好的且计算复杂度小的优化算法来选择增强手段</p>
@@ -1129,7 +1113,7 @@ $$</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../GraphCL/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Graph Contrastive Learning with Augmentations(GraphCL)">
+          <a href="../GraphCL/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GraphCL">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1139,7 +1123,7 @@ $$</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Graph Contrastive Learning with Augmentations(GraphCL)
+                GraphCL
               </div>
             </div>
           </a>
@@ -1194,6 +1178,12 @@ $$</p>
     
     
       <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
       
     
   </body>

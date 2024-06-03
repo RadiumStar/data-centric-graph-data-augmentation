@@ -39,25 +39,9 @@
 
 
     
-     
+    
       
     
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [
-        ["$", "$"],
-        ["\\(", "\\)"],
-      ],
-    },
-  };
-</script>
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-></script>
-
     
       
         
@@ -67,6 +51,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"consolas"}</style>
       
     
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -563,7 +549,7 @@
         
   
   <span class="md-ellipsis">
-    Graph Contrastive Learning with Augmentations(GraphCL)
+    GraphCL
   </span>
   
 
@@ -1133,10 +1119,10 @@
 <p>主要数据增强方法：作者使用 Manifold Mixup 来训练一个辅助的 FCN，基于插值的方法可以跳脱出当前节点的局部邻域来扩充信息缓解 over-smoothing；在 FCN 和 GNNs 之间共享网络参数，利用 FCN 中节点的更具区别性的表示，以及图的结构，按照通常的方式计算 GNNs 损失，以进一步细化节点表示 <img alt="model" src="../../../assets/images/2023-09-10-21-52-06.png" /></p>
 </li>
 <li>FCN loss from labeled data <img alt="loss fcn" src="../../../assets/images/2023-09-10-21-52-43.png" /></li>
-<li>其中$\mathcal{L}_{MM}$是Manifold Mixup计算公式，g是从input到hidden，f是hidden到output，即通过类似交叉熵损失来衡量mix后的数据输入网络前后的差距 <img alt="lossmm" src="../../../assets/images/2023-09-10-21-53-22.png" /></li>
-<li>其中 $\text{Mix}_{\lambda}(a, b) = \lambda * a + (1 - \lambda) * b$ 即插值函数 interpolation function</li>
-<li>FCN loss from unlabeled data，其中 $\hat{Y}_u$  是GNN预测的结果的分布<img alt="fcn loss unlabel" src="../../../assets/images/2023-09-10-21-53-59.png" /></li>
-<li>FCN total loss，其中 $w(t)$ 是一个sigmoid上升函数，训练过程会从0逐步增大<img alt="" src="../../../assets/images/2023-09-10-21-54-24.png" /></li>
+<li>其中<span class="arithmatex">\(\mathcal{L}_{MM}\)</span>是Manifold Mixup计算公式，g是从input到hidden，f是hidden到output，即通过类似交叉熵损失来衡量mix后的数据输入网络前后的差距 <img alt="lossmm" src="../../../assets/images/2023-09-10-21-53-22.png" /></li>
+<li>其中 <span class="arithmatex">\(\text{Mix}_{\lambda}(a, b) = \lambda * a + (1 - \lambda) * b\)</span> 即插值函数 interpolation function</li>
+<li>FCN loss from unlabeled data，其中 <span class="arithmatex">\(\hat{Y}_u\)</span>  是GNN预测的结果的分布<img alt="fcn loss unlabel" src="../../../assets/images/2023-09-10-21-53-59.png" /></li>
+<li>FCN total loss，其中 <span class="arithmatex">\(w(t)\)</span> 是一个sigmoid上升函数，训练过程会从0逐步增大<img alt="" src="../../../assets/images/2023-09-10-21-54-24.png" /></li>
 <li>GraphMix 总体 loss<img alt="loss" src="../../../assets/images/2023-09-10-21-54-36.png" /></li>
 </ol>
 <h2 id="_1">实验<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -1251,6 +1237,12 @@
     
     
       <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
       
     
   </body>

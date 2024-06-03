@@ -39,25 +39,9 @@
 
 
     
-     
+    
       
     
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [
-        ["$", "$"],
-        ["\\(", "\\)"],
-      ],
-    },
-  };
-</script>
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-></script>
-
     
       
         
@@ -67,6 +51,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"consolas"}</style>
       
     
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -563,7 +549,7 @@
         
   
   <span class="md-ellipsis">
-    Graph Contrastive Learning with Augmentations(GraphCL)
+    GraphCL
   </span>
   
 
@@ -1071,16 +1057,16 @@
 <p>feature extractor：这一步其实是node embedding的过程，作者认为原始特征高维稀疏难处理，因此先通过一个 GNN 进行node embdding的操作转为低维稠密的特征，使得后续合成节点时在域内的可信度提升</p>
 </li>
 <li>
-<p>synthetic node generation：作者采用 SMOTE 对少数类样本及其最近邻域样本进行插值来合成新的样本（即**node insertion**）做法是找到取一个少样本类别的节点，在他领域内找另外一个标签一样的，然后进行embedding后的feature插值 $\mathbf{h}<em nn_v_="nn(v)">{v^\prime} = (1 - \delta)\cdot \mathbf{h}_v + \delta\cdot\mathbf{h}</em>$</p>
+<p>synthetic node generation：作者采用 SMOTE 对少数类样本及其最近邻域样本进行插值来合成新的样本（即**node insertion**）做法是找到取一个少样本类别的节点，在他领域内找另外一个标签一样的，然后进行embedding后的feature插值 <span class="arithmatex">\(\mathbf{h}_{v^\prime} = (1 - \delta)\cdot \mathbf{h}_v + \delta\cdot\mathbf{h}_{nn(v)}\)</span></p>
 </li>
 <li>
-<p>edge generator：从原图（还没有插值前的）训练一个边预测器，输入为低维embedding；目标：$\mathcal{L} = \parallel E - A\parallel$ 即预测的结果要和原图的结构尽可能相近；之后用该边预测器连接上一步插入的新节点</p>
+<p>edge generator：从原图（还没有插值前的）训练一个边预测器，输入为低维embedding；目标：<span class="arithmatex">\(\mathcal{L} = \parallel E - A\parallel\)</span> 即预测的结果要和原图的结构尽可能相近；之后用该边预测器连接上一步插入的新节点</p>
 </li>
 <li>
 <p>最后输入到一个 GNNs 分类器</p>
 </li>
 <li>
-<p>loss: $\mathcal{L} = \mathcal{L}<em _text_edge="\text{edge">{\text{node} } + \lambda \mathcal{L}</em> }$ 前者是最后分类器的loss，后者是边预测器的loss</p>
+<p>loss: <span class="arithmatex">\(\mathcal{L} = \mathcal{L}_{\text{node} } + \lambda \mathcal{L}_{\text{edge} }\)</span> 前者是最后分类器的loss，后者是边预测器的loss</p>
 </li>
 </ul>
 </li>
@@ -1188,6 +1174,12 @@
     
     
       <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
       
     
   </body>

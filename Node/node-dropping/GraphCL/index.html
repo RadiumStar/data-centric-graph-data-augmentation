@@ -12,13 +12,13 @@
         <meta name="author" content="RadiumStar">
       
       
-        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/GRAND/">
+        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/GraphCL/">
       
       
-        <link rel="prev" href="../../">
+        <link rel="prev" href="../GRAND/">
       
       
-        <link rel="next" href="../GraphCL/">
+        <link rel="next" href="../JOAO/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>GRAND - Data-Centric Graph Data Augmentation</title>
+        <title>Graph Contrastive Learning with Augmentations(GraphCL) - Data-Centric Graph Data Augmentation</title>
       
     
     
@@ -92,7 +92,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#grand" class="md-skip">
+        <a href="#graph-contrastive-learning-with-augmentationsgraphcl" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GRAND
+              Graph Contrastive Learning with Augmentations(GraphCL)
             
           </span>
         </div>
@@ -537,6 +537,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../GRAND/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GRAND
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -553,33 +574,12 @@
         
   
   <span class="md-ellipsis">
-    GRAND
-  </span>
-  
-
-      </a>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphCL/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
     Graph Contrastive Learning with Augmentations(GraphCL)
   </span>
   
 
       </a>
+      
     </li>
   
 
@@ -1056,46 +1056,78 @@
                   
 
 
-<h1 id="grand">GRAND<a class="headerlink" href="#grand" title="Permanent link">&para;</a></h1>
+<h1 id="graph-contrastive-learning-with-augmentationsgraphcl">Graph Contrastive Learning with Augmentations(GraphCL)<a class="headerlink" href="#graph-contrastive-learning-with-augmentationsgraphcl" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p><a href="https://arxiv.org/pdf/2005.11079.pdf">Graph Random Neural Networks for Semi-Supervised Learning on Graphs</a></p>
+<p><a href="https://arxiv.org/pdf/2010.13902.pdf">Graph Contrastive Learning with Augmentations</a>
+<a href="https://papers.nips.cc/paper/2020/file/3fe230348e9a12c13120749e3f9fa4cd-Supplemental.pdf">appendix</a></p>
 </blockquote>
+<ol>
+<li>
+<p><strong>motivation</strong></p>
 <ul>
 <li>
-<p>motivation: 为了解决 GNNs 的过平滑问题，由于节点高度依赖于邻居从而易受攻击的弱鲁棒性问题，以及过拟合，难泛化的问题，作者提出了GRAND（Graph Random Neural Networks），从数据增强和一致性正则化的角度来解决上述问题</p>
+<p>GNNs 自监督预训练的研究十分缺乏：GNN 缺乏自监督的预训练研究，尤其考虑到图数据集通常规模有限，而GNN结构较浅。尤其在真实世界中的大规模图数据上。因此作者希望设计一个好的自监督预训练方案为GNNs 深层模型提供更好的初始化，处理梯度消失、爆炸</p>
 </li>
 <li>
-<p>主要数据增强方法：随机将节点特征置零，以达到 Node Dropping 的效果</p>
-<ul>
-<li>
-<p>对图的节点特征 $\mathbf{X}$ 进行 $S$ 次增强，主要方法为 DropNode：首先对于每个节点，在伯努利分布中采样，之后应用到对应的节点特征上，即将某些节点的特征置零得到 $\tilde{\mathbf{X}}$ ，即实现了节点的特征去除，之后进行 $K$ 阶的随机传播，达到结合邻居信息的效果 $\overline{\mathbf{X}} = (\sum_{k= 0}^K \frac{1}{K+1}\hat{\mathbf{A}}^k) \tilde{X}$</p>
+<p>传统的 GNN 预训练方法过于强调邻居节点的信息，可能损害了结构信息。因此，作者希望设计一个预训练框架来捕获图结构数据中的高度异构信息，以提高通用性、可迁移性和鲁棒性的图表示。</p>
 </li>
 <li>
-<p>对于增强后的 $S$ 个节点特征 $\overline{\mathbf{X}}$ ，输入到模型中进行训练，可以是MLP，也可以是GNNs，得到 $S$ 的结果 $\mathbf{Z}$</p>
-</li>
-<li>
-<p>优化目标：</p>
-<ul>
-<li>
-<p>consistency regularization loss: 取一个类似于平均结结果标签作为unlabelled data的标签，优化让 $S$ 个结果尽可能接近这个结果 $\mathcal{L}<em s="1">{\text {con }}=\frac{1}{S} \sum</em>^{S} \sum_{i=0}<sup _prime="\prime">{n-1}\left|\overline{\mathbf{Z}}_{i}</sup>-\widetilde{\mathbf{Z}}_{i}<sup 2="2">{(s)}\right|_{2}</sup> .$</p>
-</li>
-<li>
-<p>supervised loss：对于labeled节点正常求完loss之后取S个的平均$\mathcal{L}<em s="1">{\text {sup }}=-\frac{1}{S} \sum</em>^{S} \sum_{i=0}^{m-1} \mathbf{Y}<em i="i">{i}^{\top} \log \widetilde{\mathbf{Z}}</em>^{(s)}$</p>
-</li>
-<li>
-<p>$\mathcal{L} = \mathcal{L}<em _con="{con" _text="\text">{\text {sup }} + \lambda \mathcal{L}</em>}$</p>
-</li>
-</ul>
+<p>GNNs 的泛化性问题：图数据具有多种性质，包括化学分子结构、社交网络等，每种类型的图数据都包含不同的语义信息。作者希望设计一种通用泛化的 GNN 预训练方案适应不同类型的下游任务</p>
 </li>
 </ul>
 </li>
 <li>
-<p>优点：加入随机传播和一致性正则化误差后，提升了模型的泛化能力和鲁棒性，缓解了过平滑问题</p>
+<p>主要增强方法：作者提出了总体框架，包含点丢弃、边扰动、属性遮盖、子图采样，并分析了不同数据增强手段的适用场景和影响<img alt="GraphCL" src="../../../assets/images/GraphCL.png" /></p>
+<ul>
+<li>
+<p>作者提出了四种图数据增强的方法，对输入的图通过以下增强手段得到一对增强图</p>
+<ul>
+<li>
+<p>node dropping：随即丢弃一些点（以及连接的边）</p>
 </li>
 <li>
-<p>缺点：可扩展性较差，由于依赖于复杂的数据增强手段，对于大型图计算难度大</p>
+<p>edge perturbation：随机增删图中的边</p>
+</li>
+<li>
+<p>attribute masking：掩盖部分节点的属性</p>
+</li>
+<li>
+<p>subgraph：利用随机游走采样子图</p>
 </li>
 </ul>
+</li>
+<li>
+<p>GNN-based encoder：先聚合邻居信息，后通过MLP构成的投影头读出，注意可以是任意 GNN 架构搭建encoder 
+    $$
+    \boldsymbol{a}<em>{n}<sup _k_="(k)">{(k)}=\operatorname{AGGREGATION}</sup>\left(\left{\boldsymbol{h}</em>{n<sup _k-1_="(k-1)">{\prime}}</sup>: n^{\prime} \in \mathcal{N}(n)\right}\right), \boldsymbol{h}<em n="n">{n}<sup _k_="(k)">{(k)}=\operatorname{COMBINE}</sup>\left(\boldsymbol{h}</em>^{(k-1)}, \boldsymbol{a}_{n}^{(k)}\right)
+    $$ </p>
+<p>$$
+f(\mathcal{G})=\operatorname{READOUT}\left(\left{\boldsymbol{h}<em n="n">{n}^{(k)}: v</em> \in \mathcal{V}, k \in K\right}\right), \boldsymbol{z}_{\mathcal{G}}=\operatorname{MLP}(f(\mathcal{G}))
+$$</p>
+</li>
+<li>
+<p>Contrastive loss function: 使得与负样本对相比正样本对之间的一致性最大化（即同个图增强出来的的表示得相互靠近，不同的图增强得到的表示相互远离）$\ell_{n}=-\log \frac{\exp \left(\operatorname{sim}\left(\boldsymbol{z}<em j="j" n_="n,">{n, i}, \boldsymbol{z}</em>\right) / \tau\right)}{\sum_{n^{\prime}=1, n^{\prime} \neq n}^{N} \exp \left(\operatorname{sim}\left(\boldsymbol{z}<em n_prime="n^{\prime">{n, i}, \boldsymbol{z}</em>, j}\right) / \tau\right)}$</p>
+</li>
+<li>
+<p>为了将图对比学习变成一个通用的框架，重写loss的形式，本质上目标就是使得两种增强图的潜在表示之间互信息最大化 $\ell = \mathbb{E}<em _hat_mathcal_G="\hat{\mathcal{G">{\mathbb{P}</em><em _mathbb_P="\mathbb{P">i}}}{-\mathbb{E}</em><em _mathbb_P="\mathbb{P">{(\hat{\mathcal{G}_j}|\hat{\mathcal{G}_i})}}T(f_1(\hat{\mathcal{G}_i}),f_2(\hat{\mathcal{G}_j})) + \log(\mathbb{E}</em>_{\hat{\mathcal{G}_j}}}e^{T(f_1(\hat{\mathcal{G}_i}),f_2(\hat{\mathcal{G}_j}))})} $</p>
+</li>
+</ul>
+</li>
+<li>
+<p>方法评价：通过数据增强和对比学习的方法使得模型更具鲁棒性和泛化性，且分析了不同数据增强手段的适用场景和影响，有很好的数据增强指导意义。且得到以下结论：</p>
+<ul>
+<li>
+<p>边扰动类型的数据增强手段适合社交网络，但是对于生物分子这种边敏感的数据集效果不好</p>
+</li>
+<li>
+<p>属性掩盖对于稠密图效果好</p>
+</li>
+<li>
+<p>node dropping和subgraph采样的方法适用性广，容易忽略掉边缘，孤立节点，使得增强后子图与全局图属性接近一致</p>
+</li>
+</ul>
+</li>
+</ol>
 
 
 
@@ -1131,7 +1163,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Node">
+          <a href="../GRAND/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GRAND">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1141,20 +1173,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Node
+                GRAND
               </div>
             </div>
           </a>
         
         
           
-          <a href="../GraphCL/" class="md-footer__link md-footer__link--next" aria-label="Next: Graph Contrastive Learning with Augmentations(GraphCL)">
+          <a href="../JOAO/" class="md-footer__link md-footer__link--next" aria-label="Next: JOAO">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Graph Contrastive Learning with Augmentations(GraphCL)
+                JOAO
               </div>
             </div>
             <div class="md-footer__button md-icon">

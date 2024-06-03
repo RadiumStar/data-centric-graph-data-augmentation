@@ -36,7 +36,37 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/GraphENS/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/GraphMix/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/GraphSMOTE/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/GRAND/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/GraphCL/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/JOAO/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/MH-Aug/</loc>
          <lastmod>2024-06-03</lastmod>
          <changefreq>daily</changefreq>
     </url>

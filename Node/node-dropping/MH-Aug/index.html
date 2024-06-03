@@ -12,13 +12,13 @@
         <meta name="author" content="RadiumStar">
       
       
-        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/GRAND/">
+        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/MH-Aug/">
       
       
-        <link rel="prev" href="../../">
+        <link rel="prev" href="../JOAO/">
       
       
-        <link rel="next" href="../GraphCL/">
+        <link rel="next" href="../../node-adding/GraphENS/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>GRAND - Data-Centric Graph Data Augmentation</title>
+        <title>MH-Aug - Data-Centric Graph Data Augmentation</title>
       
     
     
@@ -92,7 +92,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#grand" class="md-skip">
+        <a href="#mh-aug" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GRAND
+              MH-Aug
             
           </span>
         </div>
@@ -537,19 +537,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../GRAND/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -558,7 +549,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -610,10 +600,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../MH-Aug/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -622,6 +621,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1056,44 +1056,35 @@
                   
 
 
-<h1 id="grand">GRAND<a class="headerlink" href="#grand" title="Permanent link">&para;</a></h1>
+<h1 id="mh-aug">MH-Aug<a class="headerlink" href="#mh-aug" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p><a href="https://arxiv.org/pdf/2005.11079.pdf">Graph Random Neural Networks for Semi-Supervised Learning on Graphs</a></p>
+<p><a href="https://arxiv.org/pdf/2203.14082.pdf">Metropolis-Hastings Data Augmentation for Graph Neural Networks</a></p>
 </blockquote>
 <ul>
 <li>
-<p>motivation: 为了解决 GNNs 的过平滑问题，由于节点高度依赖于邻居从而易受攻击的弱鲁棒性问题，以及过拟合，难泛化的问题，作者提出了GRAND（Graph Random Neural Networks），从数据增强和一致性正则化的角度来解决上述问题</p>
+<p>motivation: GNN 由于图数据的标签的稀疏性导致泛化性不好，因此需要数据增强手段来提升数据的多样性，但是由于图数据的非欧性质，我们难以设计有效的且保留标签信息的图数据增强架构；现有的图数据增强方法大多需要额外一个模型且不能保证数据增强的强度和多样性，因此作者提出了 MH-Aug 根据强度和多样性方面所需的分布生成增强样本</p>
 </li>
 <li>
-<p>主要数据增强方法：随机将节点特征置零，以达到 Node Dropping 的效果</p>
-<ul>
-<li>
-<p>对图的节点特征 $\mathbf{X}$ 进行 $S$ 次增强，主要方法为 DropNode：首先对于每个节点，在伯努利分布中采样，之后应用到对应的节点特征上，即将某些节点的特征置零得到 $\tilde{\mathbf{X}}$ ，即实现了节点的特征去除，之后进行 $K$ 阶的随机传播，达到结合邻居信息的效果 $\overline{\mathbf{X}} = (\sum_{k= 0}^K \frac{1}{K+1}\hat{\mathbf{A}}^k) \tilde{X}$</p>
+<p>主要数据增强方法: 基于 Metropolis-Hastings 算法（马尔科夫链蒙特卡洛采样）来从目标分布 $P$ 中采样出一个增强图 <img alt="MH-Aug" src="../../../assets/images/MH-Aug.png" /></p>
 </li>
 <li>
-<p>对于增强后的 $S$ 个节点特征 $\overline{\mathbf{X}}$ ，输入到模型中进行训练，可以是MLP，也可以是GNNs，得到 $S$ 的结果 $\mathbf{Z}$</p>
+<p>先从一个 proposal distribution 中得到一个候选图 $\mathcal{G}^{\prime}$ : 首先从高斯分布中得到 <strong>edge removing(边移除)</strong> 和 <strong>node dropping(点去除)</strong> 的去除率，然后施加到 $\mathcal{G}^{(t)}$ 上得到 $\mathcal{G}<em _mathcal_V="\mathcal{V">{\mathcal{E}}, \mathcal{G}</em>}$ 之后合并两个增强图得到 $\mathcal{G}^{\prime}$</p>
 </li>
 <li>
-<p>优化目标：</p>
-<ul>
-<li>
-<p>consistency regularization loss: 取一个类似于平均结结果标签作为unlabelled data的标签，优化让 $S$ 个结果尽可能接近这个结果 $\mathcal{L}<em s="1">{\text {con }}=\frac{1}{S} \sum</em>^{S} \sum_{i=0}<sup _prime="\prime">{n-1}\left|\overline{\mathbf{Z}}_{i}</sup>-\widetilde{\mathbf{Z}}_{i}<sup 2="2">{(s)}\right|_{2}</sup> .$</p>
+<p>通过一个 accepting ratio $\mathcal{A}$ (MH 算法决定)来决定是否接受该增强图，如果接受，则迭代为 $\mathcal{G}^{(t + 1)}$</p>
 </li>
 <li>
-<p>supervised loss：对于labeled节点正常求完loss之后取S个的平均$\mathcal{L}<em s="1">{\text {sup }}=-\frac{1}{S} \sum</em>^{S} \sum_{i=0}^{m-1} \mathbf{Y}<em i="i">{i}^{\top} \log \widetilde{\mathbf{Z}}</em>^{(s)}$</p>
+<p>loss: $\mathcal{L}_u$ 是为了一致性，即控制增强前后的图输入模型 $f$ 的结果变化；$\mathcal{L}_h$ 是一个惩罚项，鼓励模型自信预测；$\mathcal{L}_s$ 就是一般的监督样本的交叉熵损失</p>
+<p>$$
+\begin{align}
+\mathcal{L}<em i="i">{u} &amp;= \frac{1}{|\mathcal{V}|} \sum</em>^{|\mathcal{V}|} D_{K L}\left[f\left(\mathcal{G}<em i="i">{i}^{(t)} ; \theta\right) | f\left(\mathcal{G}</em>^{(t+1)} ; \theta\right)\right] \ 
+\mathcal{L}<em i="i">{h} &amp;= \frac{1}{|\mathcal{V}|} \sum</em>^{|\mathcal{V}|}\left[-f\left(\mathcal{G}<em i="i">{i} ; \theta\right) \log \left(f\left(\mathcal{G}</em> ; \theta\right)\right)\right] \
+\mathcal{L} &amp;= \mathcal{L}_s + \gamma_1\mathcal{L}_u +  \gamma_2\mathcal{L}_h
+\end{align}
+$$</p>
 </li>
 <li>
-<p>$\mathcal{L} = \mathcal{L}<em _con="{con" _text="\text">{\text {sup }} + \lambda \mathcal{L}</em>}$</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>优点：加入随机传播和一致性正则化误差后，提升了模型的泛化能力和鲁棒性，缓解了过平滑问题</p>
-</li>
-<li>
-<p>缺点：可扩展性较差，由于依赖于复杂的数据增强手段，对于大型图计算难度大</p>
+<p>方法评价: 第一次将 Metropolis-Hastings 算法用于对输入图的变体进行采样，其强度和多样性可以通过超参数来控制（strength， diversity）但是分布构造相对复杂。</p>
 </li>
 </ul>
 
@@ -1131,7 +1122,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Node">
+          <a href="../JOAO/" class="md-footer__link md-footer__link--prev" aria-label="Previous: JOAO">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1141,20 +1132,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Node
+                JOAO
               </div>
             </div>
           </a>
         
         
           
-          <a href="../GraphCL/" class="md-footer__link md-footer__link--next" aria-label="Next: Graph Contrastive Learning with Augmentations(GraphCL)">
+          <a href="../../node-adding/GraphENS/" class="md-footer__link md-footer__link--next" aria-label="Next: GraphENS">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Graph Contrastive Learning with Augmentations(GraphCL)
+                GraphENS
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -12,13 +12,13 @@
         <meta name="author" content="RadiumStar">
       
       
-        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/ImGAGN/">
+        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-interpolation/GraphSMOTE/">
       
       
-        <link rel="prev" href="../GraphSMOTE/">
+        <link rel="prev" href="../GraphMix/">
       
       
-        <link rel="next" href="../NodeSam/">
+        <link rel="next" href="../ImGAGN/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>ImGAGN - Data-Centric Graph Data Augmentation</title>
+        <title>GraphSMOTE - Data-Centric Graph Data Augmentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#imgagn" class="md-skip">
+        <a href="#graphsmote" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ImGAGN
+              GraphSMOTE
             
           </span>
         </div>
@@ -824,27 +824,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphSMOTE/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphSMOTE
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -861,12 +840,33 @@
         
   
   <span class="md-ellipsis">
-    ImGAGN
+    GraphSMOTE
   </span>
   
 
       </a>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ImGAGN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ImGAGN
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -3136,45 +3136,36 @@
   
 
 
-<h1 id="imgagn">ImGAGN<a class="headerlink" href="#imgagn" title="Permanent link">&para;</a></h1>
+<h1 id="graphsmote">GraphSMOTE<a class="headerlink" href="#graphsmote" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p><a href="https://arxiv.org/pdf/2106.02817.pdf">ImGAGN:Imbalanced Network Embedding via Generative Adversarial Graph Networks</a>  </p>
+<p><a href="https://arxiv.org/pdf/2103.08826.pdf">GraphSMOTE: Imbalanced Node Classification on Graphs with Graph Neural Networks</a></p>
 </blockquote>
 <ol>
 <li>
-<p>motivation: 大部分GNN相关的现存工作都是在假设数据集类别平衡的前提下做的，因此作者希望解决类别不平衡下的 GNN 分类问题，故作者希望设计一个图生成器来生成少数类节点以达到平衡</p>
+<p>motivation: 样本不平衡是机器学习中常见的问题，有 <strong>合成少数过采样技术（SMOTE）</strong> 可以解决，但是将 SMOTE 存在两个问题：一是直接插值合成的新的节点需要与原图构造边相连，这可能破坏图结构；二是对于图结构数据而言，少数类样本的特征空间往往非常稀疏，直接在原始的特征空间执行 SMOTE 很容易产生域外样本（噪音），破坏图特征；因此作者希望将 SMOTE 技术应用到图上，同时解决上述两个问题</p>
 </li>
 <li>
-<p>主要增强方法: 图节点插入，特征混合以及图重连；总体上是一个 GAN 的架构，通过生成少数类别的点来实现数据节点类型的平衡 <img alt="ImGAGN" src="../../../assets/images/ImGAGN.png" /></p>
+<p>主要数据增强方法: 通过特征提取的方法完善节点插入时的拓扑结构 <img alt="GraphSMOTE" src="../../../assets/images/GraphSMOTE.png" /></p>
+<ul>
+<li>
+<p>feature extractor：这一步其实是node embedding的过程，作者认为原始特征高维稀疏难处理，因此先通过一个 GNN 进行node embdding的操作转为低维稠密的特征，使得后续合成节点时在域内的可信度提升</p>
 </li>
 <li>
-<p>Graph Generator：整体模型就是一个MLP，然后输入是高斯噪声；<span class="arithmatex">\(n_g = n_{\text{majority}} - n_{\text{minority}}\)</span> 是要生成的节点数量；最后输出是节点特征以及图结构；初始化的时候，假设临近节点具有相似标签，让生成点与其他少数类节点连接；而生成少数类节点的初始化特征是其连接的真实的少数类节点特征的平均值；然后通过以下loss不断优化图结构和图特征 </p>
-<div class="arithmatex">\[
-\begin{align*}
-\mathcal{L}_{\text{gen} } &amp;=\mathcal{L}_{\text{rf} }+\mathcal{L}_{\text{mi}}+\mathcal{L}_{\text{di} }+\mathcal{L}_{\text{re} } \\
-&amp;=\sum_{i=1}^{n_{g}}-q_{i} \log \operatorname{Pr}\left(\widehat{y_{i}}=\text { real } \mid \vec{x}_{i}\right) \\
-&amp;+\sum_{i=1}^{n_{g}}-q_{i} \log \operatorname{Pr}\left(\widehat{y_{i}}=\text { minority } \mid \vec{x}_{i}\right) \\
-&amp;+\frac{1}{\left|n_{g}\right|} \sum_{i=1}^{n_{g}} \sum_{j=1}^{n_{\min }}\left\|\vec{x}_{i}-\vec{x}_{j}\right\|_{2}^{2} \\
-&amp;+\alpha|| \Theta \|_{2}^{2}
-\end{align*}
-\]</div>
-<p>其中 <span class="arithmatex">\(\mathcal{L}_{\text{rf} }\)</span> 是迷惑判别器使得它无法识别原本的样本和真实的样本，即让生成的节点更加真实；<span class="arithmatex">\(\mathcal{L}_{\text{mi}}\)</span> 是让判别器无法识别是少数样本点还是多数样本点，从而达到 balance 的作用；<span class="arithmatex">\(\mathcal{L}_{\text{di} }\)</span> 是让生成节点的特征尽可能接近真实节点；最后一个是正则项</p>
+<p>synthetic node generation：作者采用 SMOTE 对少数类样本及其最近邻域样本进行插值来合成新的样本（即**node insertion**）做法是找到取一个少样本类别的节点，在他领域内找另外一个标签一样的，然后进行embedding后的feature插值 <span class="arithmatex">\(\mathbf{h}_{v^\prime} = (1 - \delta)\cdot \mathbf{h}_v + \delta\cdot\mathbf{h}_{nn(v)}\)</span></p>
 </li>
 <li>
-<p>discriminator：采用一个 GCN 当判别器（GNNs 应该都可以）输出是每个节点是 <span class="arithmatex">\(\{(real, minority), (real, majority), (fake, minority)\}\)</span> 的概率</p>
-<div class="arithmatex">\[
-\begin{align*}
-\mathcal{L}_{\text {dis }}&amp;=\mathcal{L}_{f a}+\mathcal{L}_{c l}+\mathcal{L}_{m m}+\mathcal{L}_{\text {ree }} \\
-&amp;=\sum_{i=1}^{n_{g}+n_{m i n}+n_{m a j}}-\left[q_{i} \log \left(\operatorname{Pr}\left(\widehat{y_{i}}=\text { fake } \mid \vec{x}_{i}\right)\right) +\left(1-q_{i}\right) \log \left(1-\operatorname{Pr}\left(\widehat{y_{i}}=\text { fake } \mid \overrightarrow{x_{i}}\right)\right)\right] \\
-&amp;+\sum_{i=1}^{n_{g}+n_{\text {min }}+n_{m a j}}-\left[q_{i} \log \left(\operatorname{Pr}\left(\widehat{y_{i}}=\text { minority } \mid \vec{x}_{i}\right)\right) +\left(1-q_{i}\right) \log \left(1-\operatorname{Pr}\left(\widehat{y_{i}}=\text { minority } \vec{x}_{i}\right)\right)\right] \\
-&amp;-\sum_{i=1}^{n_{m i n}} \sum_{j=1}^{n_{m a j}}\left\|\overrightarrow{h_{i}}-\overrightarrow{h_{j}}\right\|_{2}^{2} \\
-&amp;+\beta\|\Omega\|_{2}^{2}
-\end{align*}
-\]</div>
-<p>其中 <span class="arithmatex">\(\mathcal{L}_{\text{fa} }\)</span> 是识别真伪节点； <span class="arithmatex">\(\mathcal{L}_{\text{cl} }\)</span>是识别少数样本点还是多数样本点；<span class="arithmatex">\(\mathcal{L}_{\text{mm} }\)</span>是尽量让每个节点特征远离；最后是一个正则项</p>
+<p>edge generator：从原图（还没有插值前的）训练一个边预测器，输入为低维embedding；目标：<span class="arithmatex">\(\mathcal{L} = \parallel E - A\parallel\)</span> 即预测的结果要和原图的结构尽可能相近；之后用该边预测器连接上一步插入的新节点</p>
 </li>
 <li>
-<p>方法评价: 通过ImGAGN生成的平衡类别的图数据提升了节点分类的效果；作者采用GAN架构来生成节点的思路也很新颖，也代表了一种数据增强的手段方式，但是目前只针对二分类问题，如果要面对多分类，可能需要每个类别对都训练一个 GraphGenerator，明显效率低；只使用了相同子类的节点进行新节点插入生成，对节点特征的多样性有影响。可以应用于样本不平衡的图数据，例如在社交网络中，诈骗分子是数量较少的类别，用以识别诈骗分子</p>
+<p>最后输入到一个 GNNs 分类器</p>
+</li>
+<li>
+<p>loss: <span class="arithmatex">\(\mathcal{L} = \mathcal{L}_{\text{node} } + \lambda \mathcal{L}_{\text{edge} }\)</span> 前者是最后分类器的loss，后者是边预测器的loss</p>
+</li>
+</ul>
+</li>
+<li>
+<p>方法评价：将SMOTE应用到图领域，缓解了样本不平衡的问题，通过对少样本类别插入新节点并重构图（可以看作data augmentation）来实现GNN 分类的效果提升，但是只使用了相同子类的节点进行新节点插入生成，对节点特征的多样性有影响；可以应用于样本不平衡的图数据，例如僵尸用户的检测等任务上。</p>
 </li>
 </ol>
 
@@ -3212,7 +3203,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../GraphSMOTE/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GraphSMOTE">
+          <a href="../GraphMix/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GraphMix">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -3222,20 +3213,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                GraphSMOTE
+                GraphMix
               </div>
             </div>
           </a>
         
         
           
-          <a href="../NodeSam/" class="md-footer__link md-footer__link--next" aria-label="Next: NodeSam">
+          <a href="../ImGAGN/" class="md-footer__link md-footer__link--next" aria-label="Next: ImGAGN">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                NodeSam
+                ImGAGN
               </div>
             </div>
             <div class="md-footer__button md-icon">

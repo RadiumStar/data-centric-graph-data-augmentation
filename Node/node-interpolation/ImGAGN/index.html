@@ -12,13 +12,13 @@
         <meta name="author" content="RadiumStar">
       
       
-        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/GraphENS/">
+        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-interpolation/ImGAGN/">
       
       
-        <link rel="prev" href="../../node-dropping/NodeSam/">
+        <link rel="prev" href="../GraphSMOTE/">
       
       
-        <link rel="next" href="../GraphMix/">
+        <link rel="next" href="../NodeSam/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>GraphENS - Data-Centric Graph Data Augmentation</title>
+        <title>ImGAGN - Data-Centric Graph Data Augmentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#graphens" class="md-skip">
+        <a href="#imgagn" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GraphENS
+              ImGAGN
             
           </span>
         </div>
@@ -782,19 +782,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../GraphENS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -803,7 +794,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -855,10 +845,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../ImGAGN/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -867,6 +866,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -3136,33 +3136,45 @@
   
 
 
-<h1 id="graphens">GraphENS<a class="headerlink" href="#graphens" title="Permanent link">&para;</a></h1>
+<h1 id="imgagn">ImGAGN<a class="headerlink" href="#imgagn" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p><a href="https://openreview.net/pdf?id=MXEl7i-iru">GRAPHENS:NEIGHBOR-AWARE EGO NETWORK SYNTHESIS FOR CLASS-IMBALANCED NODE CLASSIFICATION</a></p>
+<p><a href="https://arxiv.org/pdf/2106.02817.pdf">ImGAGN:Imbalanced Network Embedding via Generative Adversarial Graph Networks</a>  </p>
 </blockquote>
 <ol>
 <li>
-<p>motivation: 类别不平衡问题会影响 GNN 分类表现，现存解决这类问题的方法虽然可以产生多一些少数类节点来实现平衡，但是没有考虑节点之间消息传递的影响（neighbor memorization），只利用了少数类节点的特征，因此生成的新节点特征没有多样性，因此作者提出了 GraphENS</p>
+<p>motivation: 大部分GNN相关的现存工作都是在假设数据集类别平衡的前提下做的，因此作者希望解决类别不平衡下的 GNN 分类问题，故作者希望设计一个图生成器来生成少数类节点以达到平衡</p>
 </li>
 <li>
-<p>主要增强方法: <img alt="GraphENS" src="../../../assets/images/GraphENS.png" /></p>
-<ul>
+<p>主要增强方法: 图节点插入，特征混合以及图重连；总体上是一个 GAN 的架构，通过生成少数类别的点来实现数据节点类型的平衡 <img alt="ImGAGN" src="../../../assets/images/ImGAGN.png" /></p>
+</li>
 <li>
-<p>neighbor sampling：选取一个少数类节点和一个目标节点（注意这里的目标节点是所有类别的节点，因此相较于之前的方法，没有只从少数类节点中提取信息，从而保证了特征的多样性）给这两个节点构造邻居分布，之后把这两个节点输入到 GNN 后的结果进行KL散度的计算，得到混合比例 <span class="arithmatex">\(\hat{\phi}\)</span>  ；为新节点构造一个概率分布，用于邻居采样 </p>
+<p>Graph Generator：整体模型就是一个MLP，然后输入是高斯噪声；<span class="arithmatex">\(n_g = n_{\text{majority}} - n_{\text{minority}}\)</span> 是要生成的节点数量；最后输出是节点特征以及图结构；初始化的时候，假设临近节点具有相似标签，让生成点与其他少数类节点连接；而生成少数类节点的初始化特征是其连接的真实的少数类节点特征的平均值；然后通过以下loss不断优化图结构和图特征 </p>
 <div class="arithmatex">\[
-p\left(u \mid v_{\text {mixed }}\right)=\hat{\phi} p\left(u \mid v_{\text {minor }}\right)+(1-\hat{\phi}) p\left(u \mid v_{\text {target }}\right)
+\begin{align*}
+\mathcal{L}_{\text{gen} } &amp;=\mathcal{L}_{\text{rf} }+\mathcal{L}_{\text{mi}}+\mathcal{L}_{\text{di} }+\mathcal{L}_{\text{re} } \\
+&amp;=\sum_{i=1}^{n_{g}}-q_{i} \log \operatorname{Pr}\left(\widehat{y_{i}}=\text { real } \mid \vec{x}_{i}\right) \\
+&amp;+\sum_{i=1}^{n_{g}}-q_{i} \log \operatorname{Pr}\left(\widehat{y_{i}}=\text { minority } \mid \vec{x}_{i}\right) \\
+&amp;+\frac{1}{\left|n_{g}\right|} \sum_{i=1}^{n_{g}} \sum_{j=1}^{n_{\min }}\left\|\vec{x}_{i}-\vec{x}_{j}\right\|_{2}^{2} \\
+&amp;+\alpha|| \Theta \|_{2}^{2}
+\end{align*}
 \]</div>
+<p>其中 <span class="arithmatex">\(\mathcal{L}_{\text{rf} }\)</span> 是迷惑判别器使得它无法识别原本的样本和真实的样本，即让生成的节点更加真实；<span class="arithmatex">\(\mathcal{L}_{\text{mi}}\)</span> 是让判别器无法识别是少数样本点还是多数样本点，从而达到 balance 的作用；<span class="arithmatex">\(\mathcal{L}_{\text{di} }\)</span> 是让生成节点的特征尽可能接近真实节点；最后一个是正则项</p>
 </li>
 <li>
-<p>saliency-based node mixing：首先作者利用反向传播计算节点的梯度 <span class="arithmatex">\(\frac{\partial\mathcal{L}}{\partial X}\)</span> ，将其当作特征显著性，即作者认为节点的该特征如果对模型变化的贡献程度越大，则特征显著性越强；之后利用下述公式进行特征混合，其中每一维特征的选取概率由特征显著性决定，如果越显著则混合的比率越小；另外作者还加入了目标节点的一些噪声  </p>
+<p>discriminator：采用一个 GCN 当判别器（GNNs 应该都可以）输出是每个节点是 <span class="arithmatex">\(\{(real, minority), (real, majority), (fake, minority)\}\)</span> 的概率</p>
 <div class="arithmatex">\[
-v_{\text {mixed }}=\left(1-\Lambda_{K}\right) \odot v_{\text {minor }}+\Lambda_{K} \odot v_{\text {target }} \text {, where } \Lambda_{K}=\lambda \cdot M_{K}
+\begin{align*}
+\mathcal{L}_{\text {dis }}&amp;=\mathcal{L}_{f a}+\mathcal{L}_{c l}+\mathcal{L}_{m m}+\mathcal{L}_{\text {ree }} \\
+&amp;=\sum_{i=1}^{n_{g}+n_{m i n}+n_{m a j}}-\left[q_{i} \log \left(\operatorname{Pr}\left(\widehat{y_{i}}=\text { fake } \mid \vec{x}_{i}\right)\right) +\left(1-q_{i}\right) \log \left(1-\operatorname{Pr}\left(\widehat{y_{i}}=\text { fake } \mid \overrightarrow{x_{i}}\right)\right)\right] \\
+&amp;+\sum_{i=1}^{n_{g}+n_{\text {min }}+n_{m a j}}-\left[q_{i} \log \left(\operatorname{Pr}\left(\widehat{y_{i}}=\text { minority } \mid \vec{x}_{i}\right)\right) +\left(1-q_{i}\right) \log \left(1-\operatorname{Pr}\left(\widehat{y_{i}}=\text { minority } \vec{x}_{i}\right)\right)\right] \\
+&amp;-\sum_{i=1}^{n_{m i n}} \sum_{j=1}^{n_{m a j}}\left\|\overrightarrow{h_{i}}-\overrightarrow{h_{j}}\right\|_{2}^{2} \\
+&amp;+\beta\|\Omega\|_{2}^{2}
+\end{align*}
 \]</div>
-</li>
-</ul>
+<p>其中 <span class="arithmatex">\(\mathcal{L}_{\text{fa} }\)</span> 是识别真伪节点； <span class="arithmatex">\(\mathcal{L}_{\text{cl} }\)</span>是识别少数样本点还是多数样本点；<span class="arithmatex">\(\mathcal{L}_{\text{mm} }\)</span>是尽量让每个节点特征远离；最后是一个正则项</p>
 </li>
 <li>
-<p>方法评价: 作者通过置换实验展示了 Neighbor Memorization的问题，说明了 GNN 对邻居的过拟合要比对少类节点本身的过拟合更严重；另外根据特征显著性进行混合以及加入其他类别的特征噪声的方法使得生成节点的特征多样性更丰富，缓解了Neighbor Memorization的问题。</p>
+<p>方法评价: 通过ImGAGN生成的平衡类别的图数据提升了节点分类的效果；作者采用GAN架构来生成节点的思路也很新颖，也代表了一种数据增强的手段方式，但是目前只针对二分类问题，如果要面对多分类，可能需要每个类别对都训练一个 GraphGenerator，明显效率低；只使用了相同子类的节点进行新节点插入生成，对节点特征的多样性有影响。可以应用于样本不平衡的图数据，例如在社交网络中，诈骗分子是数量较少的类别，用以识别诈骗分子</p>
 </li>
 </ol>
 
@@ -3200,7 +3212,7 @@ v_{\text {mixed }}=\left(1-\Lambda_{K}\right) \odot v_{\text {minor }}+\Lambda_{
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../node-dropping/NodeSam/" class="md-footer__link md-footer__link--prev" aria-label="Previous: NodeSam">
+          <a href="../GraphSMOTE/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GraphSMOTE">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -3210,20 +3222,20 @@ v_{\text {mixed }}=\left(1-\Lambda_{K}\right) \odot v_{\text {minor }}+\Lambda_{
                 Previous
               </span>
               <div class="md-ellipsis">
-                NodeSam
+                GraphSMOTE
               </div>
             </div>
           </a>
         
         
           
-          <a href="../GraphMix/" class="md-footer__link md-footer__link--next" aria-label="Next: GraphMix">
+          <a href="../NodeSam/" class="md-footer__link md-footer__link--next" aria-label="Next: NodeSam">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                GraphMix
+                NodeSam
               </div>
             </div>
             <div class="md-footer__button md-icon">

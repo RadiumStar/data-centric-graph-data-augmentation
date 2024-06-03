@@ -785,7 +785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="node-adding/GraphENS/" class="md-nav__link">
+      <a href="node-interpolation/GraphENS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -806,7 +806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="node-adding/GraphMix/" class="md-nav__link">
+      <a href="node-interpolation/GraphMix/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -827,7 +827,7 @@
   
   
     <li class="md-nav__item">
-      <a href="node-adding/GraphSMOTE/" class="md-nav__link">
+      <a href="node-interpolation/GraphSMOTE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -848,7 +848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="node-adding/ImGAGN/" class="md-nav__link">
+      <a href="node-interpolation/ImGAGN/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -869,7 +869,7 @@
   
   
     <li class="md-nav__item">
-      <a href="node-adding/NodeSam/" class="md-nav__link">
+      <a href="node-interpolation/NodeSam/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3127,13 +3127,11 @@
 
 
 <h1 id="node">Node<a class="headerlink" href="#node" title="Permanent link">&para;</a></h1>
+<p>在图机器学习（Graph Machine Learning）中，图数据中的节点通常带有节点的拓扑结构（即节点的邻接矩阵，表示节点与周围节点之间的连接关系）、节点的标签、节点特征等等数据信息；节点分类任务、节点预测任务、节点嵌入（node embedding）任务中也是图机器学习中常见的与节点紧密相关的任务。</p>
+<p>节点级别的图数据增强通常涉及以下两种手段：</p>
 <ul>
-<li>node dropping</li>
-<li>feature mask all</li>
-<li>drop, but consider edge</li>
-<li>node adding</li>
-<li>node interaction</li>
-<li>node insertion</li>
+<li>节点删除 node dropping：部分研究会采用保留节点的拓扑结构，但是将节点的特征信息置零的方式实现 node dropping；还有部分研究是让节点直接从原图中剔除出去，即删除该节点，并且删除连接该节点的边；</li>
+<li>节点插入 node interpolation：在样本不平衡的数据场景或其他其他场景中，需要通过新节点的构造和插入原图以达到数据集的某些指标的优化，通常需要知道所插入位置周围的节点的标签和特征信息，以及全图的全局信息，进行节点数据的混合以构造新的图节点；</li>
 </ul>
 
 

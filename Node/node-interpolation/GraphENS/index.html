@@ -12,13 +12,13 @@
         <meta name="author" content="RadiumStar">
       
       
-        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/GraphSMOTE/">
+        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-interpolation/GraphENS/">
       
       
-        <link rel="prev" href="../GraphMix/">
+        <link rel="prev" href="../../node-dropping/NodeSam/">
       
       
-        <link rel="next" href="../ImGAGN/">
+        <link rel="next" href="../GraphMix/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>GraphSMOTE - Data-Centric Graph Data Augmentation</title>
+        <title>GraphENS - Data-Centric Graph Data Augmentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#graphsmote" class="md-skip">
+        <a href="#graphens" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GraphSMOTE
+              GraphENS
             
           </span>
         </div>
@@ -782,10 +782,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../GraphENS/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -794,6 +803,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -824,19 +834,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../GraphSMOTE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -845,7 +846,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -3136,36 +3136,33 @@
   
 
 
-<h1 id="graphsmote">GraphSMOTE<a class="headerlink" href="#graphsmote" title="Permanent link">&para;</a></h1>
+<h1 id="graphens">GraphENS<a class="headerlink" href="#graphens" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p><a href="https://arxiv.org/pdf/2103.08826.pdf">GraphSMOTE: Imbalanced Node Classification on Graphs with Graph Neural Networks</a></p>
+<p><a href="https://openreview.net/pdf?id=MXEl7i-iru">GRAPHENS:NEIGHBOR-AWARE EGO NETWORK SYNTHESIS FOR CLASS-IMBALANCED NODE CLASSIFICATION</a></p>
 </blockquote>
 <ol>
 <li>
-<p>motivation: 样本不平衡是机器学习中常见的问题，有 <strong>合成少数过采样技术（SMOTE）</strong> 可以解决，但是将 SMOTE 存在两个问题：一是直接插值合成的新的节点需要与原图构造边相连，这可能破坏图结构；二是对于图结构数据而言，少数类样本的特征空间往往非常稀疏，直接在原始的特征空间执行 SMOTE 很容易产生域外样本（噪音），破坏图特征；因此作者希望将 SMOTE 技术应用到图上，同时解决上述两个问题</p>
+<p>motivation: 类别不平衡问题会影响 GNN 分类表现，现存解决这类问题的方法虽然可以产生多一些少数类节点来实现平衡，但是没有考虑节点之间消息传递的影响（neighbor memorization），只利用了少数类节点的特征，因此生成的新节点特征没有多样性，因此作者提出了 GraphENS</p>
 </li>
 <li>
-<p>主要数据增强方法: 通过特征提取的方法完善节点插入时的拓扑结构 <img alt="GraphSMOTE" src="../../../assets/images/GraphSMOTE.png" /></p>
+<p>主要增强方法: <img alt="GraphENS" src="../../../assets/images/GraphENS.png" /></p>
 <ul>
 <li>
-<p>feature extractor：这一步其实是node embedding的过程，作者认为原始特征高维稀疏难处理，因此先通过一个 GNN 进行node embdding的操作转为低维稠密的特征，使得后续合成节点时在域内的可信度提升</p>
+<p>neighbor sampling：选取一个少数类节点和一个目标节点（注意这里的目标节点是所有类别的节点，因此相较于之前的方法，没有只从少数类节点中提取信息，从而保证了特征的多样性）给这两个节点构造邻居分布，之后把这两个节点输入到 GNN 后的结果进行KL散度的计算，得到混合比例 <span class="arithmatex">\(\hat{\phi}\)</span>  ；为新节点构造一个概率分布，用于邻居采样 </p>
+<div class="arithmatex">\[
+p\left(u \mid v_{\text {mixed }}\right)=\hat{\phi} p\left(u \mid v_{\text {minor }}\right)+(1-\hat{\phi}) p\left(u \mid v_{\text {target }}\right)
+\]</div>
 </li>
 <li>
-<p>synthetic node generation：作者采用 SMOTE 对少数类样本及其最近邻域样本进行插值来合成新的样本（即**node insertion**）做法是找到取一个少样本类别的节点，在他领域内找另外一个标签一样的，然后进行embedding后的feature插值 <span class="arithmatex">\(\mathbf{h}_{v^\prime} = (1 - \delta)\cdot \mathbf{h}_v + \delta\cdot\mathbf{h}_{nn(v)}\)</span></p>
-</li>
-<li>
-<p>edge generator：从原图（还没有插值前的）训练一个边预测器，输入为低维embedding；目标：<span class="arithmatex">\(\mathcal{L} = \parallel E - A\parallel\)</span> 即预测的结果要和原图的结构尽可能相近；之后用该边预测器连接上一步插入的新节点</p>
-</li>
-<li>
-<p>最后输入到一个 GNNs 分类器</p>
-</li>
-<li>
-<p>loss: <span class="arithmatex">\(\mathcal{L} = \mathcal{L}_{\text{node} } + \lambda \mathcal{L}_{\text{edge} }\)</span> 前者是最后分类器的loss，后者是边预测器的loss</p>
+<p>saliency-based node mixing：首先作者利用反向传播计算节点的梯度 <span class="arithmatex">\(\frac{\partial\mathcal{L}}{\partial X}\)</span> ，将其当作特征显著性，即作者认为节点的该特征如果对模型变化的贡献程度越大，则特征显著性越强；之后利用下述公式进行特征混合，其中每一维特征的选取概率由特征显著性决定，如果越显著则混合的比率越小；另外作者还加入了目标节点的一些噪声  </p>
+<div class="arithmatex">\[
+v_{\text {mixed }}=\left(1-\Lambda_{K}\right) \odot v_{\text {minor }}+\Lambda_{K} \odot v_{\text {target }} \text {, where } \Lambda_{K}=\lambda \cdot M_{K}
+\]</div>
 </li>
 </ul>
 </li>
 <li>
-<p>方法评价：将SMOTE应用到图领域，缓解了样本不平衡的问题，通过对少样本类别插入新节点并重构图（可以看作data augmentation）来实现GNN 分类的效果提升，但是只使用了相同子类的节点进行新节点插入生成，对节点特征的多样性有影响；可以应用于样本不平衡的图数据，例如僵尸用户的检测等任务上。</p>
+<p>方法评价: 作者通过置换实验展示了 Neighbor Memorization的问题，说明了 GNN 对邻居的过拟合要比对少类节点本身的过拟合更严重；另外根据特征显著性进行混合以及加入其他类别的特征噪声的方法使得生成节点的特征多样性更丰富，缓解了Neighbor Memorization的问题。</p>
 </li>
 </ol>
 
@@ -3203,7 +3200,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../GraphMix/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GraphMix">
+          <a href="../../node-dropping/NodeSam/" class="md-footer__link md-footer__link--prev" aria-label="Previous: NodeSam">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -3213,20 +3210,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                GraphMix
+                NodeSam
               </div>
             </div>
           </a>
         
         
           
-          <a href="../ImGAGN/" class="md-footer__link md-footer__link--next" aria-label="Next: ImGAGN">
+          <a href="../GraphMix/" class="md-footer__link md-footer__link--next" aria-label="Next: GraphMix">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                ImGAGN
+                GraphMix
               </div>
             </div>
             <div class="md-footer__button md-icon">

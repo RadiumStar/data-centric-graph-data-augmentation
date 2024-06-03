@@ -782,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Node/node-adding/GraphENS/" class="md-nav__link">
+      <a href="../Node/node-interpolation/GraphENS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -803,7 +803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Node/node-adding/GraphMix/" class="md-nav__link">
+      <a href="../Node/node-interpolation/GraphMix/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -824,7 +824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Node/node-adding/GraphSMOTE/" class="md-nav__link">
+      <a href="../Node/node-interpolation/GraphSMOTE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -845,7 +845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Node/node-adding/ImGAGN/" class="md-nav__link">
+      <a href="../Node/node-interpolation/ImGAGN/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -866,7 +866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Node/node-adding/NodeSam/" class="md-nav__link">
+      <a href="../Node/node-interpolation/NodeSam/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3127,10 +3127,14 @@
 
 
 <h1 id="label">Label<a class="headerlink" href="#label" title="Permanent link">&para;</a></h1>
+<p>在图机器学习（Graph Machine Learning）中，图数据中的节点通常带有节点或者图通常带有标签信息，然而由于数据标注任务的繁杂和精密，对于一般的数据集，带有标签的节点或图通常是稀有的。因此，研究人员实现了一些基于标签的图数据增强方法。通常涉及三个方面：</p>
 <ul>
-<li>pseudo label</li>
-<li>label mixing</li>
-<li>label sharpening </li>
+<li>伪标签 pseudo label：通常给没有标签的节点或图上构造一个伪标签，来实现图数据增强；</li>
+<li>标签混合 label mixing：通常在插入新的构造节点时，需要综合局部和全局的节点标签信息，给予新的节点一个混合后的标签；</li>
+<li>标签锐化 label sharpening：类似于下面的公式，在一个节点上聚合周围的节点的标签信息，源于计算机视觉（CV）中的锐化技巧
+    $$
+    \tilde{p}<em ij="ij">{ij} = \tilde{y}^{1/T}</em> / \sum_{c=0}<sup 1_T="1/T">{C-1}\tilde{y}</sup>_{ic}
+    $$</li>
 </ul>
 
 

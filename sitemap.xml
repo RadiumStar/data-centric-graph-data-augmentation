@@ -341,31 +341,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/GraphENS/</loc>
-         <lastmod>2024-06-03</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/GraphMix/</loc>
-         <lastmod>2024-06-03</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/GraphSMOTE/</loc>
-         <lastmod>2024-06-03</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/ImGAGN/</loc>
-         <lastmod>2024-06-03</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/NodeSam/</loc>
-         <lastmod>2024-06-03</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/AutoGCL/</loc>
          <lastmod>2024-06-03</lastmod>
          <changefreq>daily</changefreq>
@@ -411,7 +386,27 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/tags/</loc>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-interpolation/GraphENS/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-interpolation/GraphMix/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-interpolation/GraphSMOTE/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-interpolation/ImGAGN/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-interpolation/NodeSam/</loc>
          <lastmod>2024-06-03</lastmod>
          <changefreq>daily</changefreq>
     </url>

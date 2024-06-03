@@ -782,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Node/node-adding/GraphENS/" class="md-nav__link">
+      <a href="../Node/node-interpolation/GraphENS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -803,7 +803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Node/node-adding/GraphMix/" class="md-nav__link">
+      <a href="../Node/node-interpolation/GraphMix/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -824,7 +824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Node/node-adding/GraphSMOTE/" class="md-nav__link">
+      <a href="../Node/node-interpolation/GraphSMOTE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -845,7 +845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Node/node-adding/ImGAGN/" class="md-nav__link">
+      <a href="../Node/node-interpolation/ImGAGN/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -866,7 +866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Node/node-adding/NodeSam/" class="md-nav__link">
+      <a href="../Node/node-interpolation/NodeSam/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3127,10 +3127,11 @@
 
 
 <h1 id="feature">Feature<a class="headerlink" href="#feature" title="Permanent link">&para;</a></h1>
+<p>在图机器学习（Graph Machine Learning）中，图数据中的节点或图都含有丰富的特征信息，但是这些特征信息会由于数据收集的过程中的一些错误而导致特征缺失甚至稀疏、特征错误等。研究人员除了在图的拓扑结构上进行了大量研究，也在图的特征级别上做了许多工作。</p>
 <ul>
-<li>feature shuffling</li>
-<li>feature mixing</li>
-<li>feature masking</li>
+<li>feature shuffling：特征洗牌，即打乱一个节点的不同特征行；</li>
+<li>feature mixing：特征混合，通常在插入新的构造节点时，需要综合局部和全局的节点特征信息，给予新的节点一个混合后的特征；其他任务也有涉及；</li>
+<li>feature masking：通常采用给特征置零、添加偏移等方式，实现特征的遮盖优化；</li>
 </ul>
 
 

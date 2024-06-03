@@ -12,13 +12,13 @@
         <meta name="author" content="RadiumStar">
       
       
-        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/GraphMix/">
+        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-interpolation/NodeSam/">
       
       
-        <link rel="prev" href="../GraphENS/">
+        <link rel="prev" href="../ImGAGN/">
       
       
-        <link rel="next" href="../GraphSMOTE/">
+        <link rel="next" href="../../../Edge/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>GraphMix - Data-Centric Graph Data Augmentation</title>
+        <title>NodeSam - Data-Centric Graph Data Augmentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#graphmix" class="md-skip">
+        <a href="#nodesam" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GraphMix
+              NodeSam
             
           </span>
         </div>
@@ -803,30 +803,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    GraphMix
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../GraphMix/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -835,35 +815,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      实验
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -915,10 +866,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../NodeSam/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -927,6 +887,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -3159,23 +3120,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      实验
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -3192,45 +3136,57 @@
   
 
 
-<h1 id="graphmix">GraphMix<a class="headerlink" href="#graphmix" title="Permanent link">&para;</a></h1>
+<h1 id="nodesam">NodeSam<a class="headerlink" href="#nodesam" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p><a href="https://arxiv.org/pdf/1909.11715">Improved Training of GNNs for Semi-Supervised Learning</a></p>
+<p><a href="https://arxiv.org/pdf/2202.10107.pdf">Model-Agnostic Augmentation for Accurate Graph Classification</a></p>
 </blockquote>
 <ol>
 <li>
-<p>Motivation</p>
+<p>motivation: 目前的图数据增强工作存在两个问题：一是增强过程中涉及到目标模型；二是只利用简单的启发式方法，可能增强出不可靠的结果；因此作者设计了与模型无关的数据增强算法，以实现更加准确的图分类</p>
 </li>
 <li>
-<p>目前图数据增强的领域很少人探讨，已有方法也都计算量太大，因此作者想提出一种有效的图数据增强方法</p>
-</li>
-<li>
-<p>为了解决插值方法的图数据增强后不知道如何保证原本图结构不被破坏的问题，作者希望提出一种方法，能在插值图数据增强后仍能保留图数据结构</p>
-</li>
-<li>
-<p>通过插值解决GNNs的过平滑问题</p>
-</li>
-<li>
-<p>主要数据增强方法：作者使用 Manifold Mixup 来训练一个辅助的 FCN，基于插值的方法可以跳脱出当前节点的局部邻域来扩充信息缓解 over-smoothing；在 FCN 和 GNNs 之间共享网络参数，利用 FCN 中节点的更具区别性的表示，以及图的结构，按照通常的方式计算 GNNs 损失，以进一步细化节点表示 <img alt="model" src="../../../assets/images/2023-09-10-21-52-06.png" /></p>
-</li>
-<li>FCN loss from labeled data <img alt="loss fcn" src="../../../assets/images/2023-09-10-21-52-43.png" /></li>
-<li>其中<span class="arithmatex">\(\mathcal{L}_{MM}\)</span>是Manifold Mixup计算公式，g是从input到hidden，f是hidden到output，即通过类似交叉熵损失来衡量mix后的数据输入网络前后的差距 <img alt="lossmm" src="../../../assets/images/2023-09-10-21-53-22.png" /></li>
-<li>其中 <span class="arithmatex">\(\text{Mix}_{\lambda}(a, b) = \lambda * a + (1 - \lambda) * b\)</span> 即插值函数 interpolation function</li>
-<li>FCN loss from unlabeled data，其中 <span class="arithmatex">\(\hat{Y}_u\)</span>  是GNN预测的结果的分布<img alt="fcn loss unlabel" src="../../../assets/images/2023-09-10-21-53-59.png" /></li>
-<li>FCN total loss，其中 <span class="arithmatex">\(w(t)\)</span> 是一个sigmoid上升函数，训练过程会从0逐步增大<img alt="" src="../../../assets/images/2023-09-10-21-54-24.png" /></li>
-<li>GraphMix 总体 loss<img alt="loss" src="../../../assets/images/2023-09-10-21-54-36.png" /></li>
-</ol>
-<h2 id="_1">实验<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>主要增强方法：对节点进行拆分或者合并</p>
 <ul>
 <li>
-<p>半监督节点分类问题对各种模型的表现都提升，且使得类特定的隐藏状态更加集中：作者将GraphMix用到GCN，GAT和Graph U-Net上，对于不同数据集（包含大数据集），通过准确率，tsne分类可视化，还有Class-specific Soft-Rank验证想法</p>
+<p>作者首先提出了五个增强方法应该满足的属性</p>
+<ul>
+<li>
+<p>保留尺寸：即增强后节点和边的数量不变</p>
 </li>
 <li>
-<p>对于只有少量标签数据的数据集使用GraphMix表现更好：作者对比了每类标签只保留5和10个后的少标签数据集下各模型的准确率 <img alt="" src="../../../assets/images/2023-09-10-21-55-32.png" /></p>
+<p>保持连通性</p>
 </li>
 <li>
-<p>半监督链接分类问题表现更好：作者通过与GMNN。GCN，DeepWalk比较F1 score来验证</p>
+<p>改变节点</p>
+</li>
+<li>
+<p>改变边</p>
+</li>
+<li>
+<p>线性复杂度 <span class="arithmatex">\(O(|d\cdot\mathcal{V} + \mathcal{E}|),d\)</span> 是特征维数</p>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+<li>
+<p>NodeSam: 对节点进行拆分和合并 <img alt="nodesam" src="../../../assets/images/nodesam.png" /></p>
+<ul>
+<li>
+<p>拆分：随机选择一个节点，将其拆为两个，特征复制一份，然后之间用一条边相连</p>
+</li>
+<li>
+<p>调整：由于后续的合并操作会减少很多边，可能会破坏拓扑结构，因此随机选择拆分出来的两个节点的邻居（作者限定为形成三角形的邻居节点），之后增加边连接邻居与拆分点</p>
+</li>
+<li>
+<p>合并：随机合并两个节点为一个节点，所连边为原来两个节点的并，特征为原来两个节点的平均特征</p>
+</li>
+</ul>
+</li>
+<li>
+<p>方法评价: 作者针对图分类问题提出了两种模型无关的数据增强算法，实现了更加准确的图分类</p>
+</li>
+</ol>
 
 
 
@@ -3266,7 +3222,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../GraphENS/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GraphENS">
+          <a href="../ImGAGN/" class="md-footer__link md-footer__link--prev" aria-label="Previous: ImGAGN">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -3276,20 +3232,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                GraphENS
+                ImGAGN
               </div>
             </div>
           </a>
         
         
           
-          <a href="../GraphSMOTE/" class="md-footer__link md-footer__link--next" aria-label="Next: GraphSMOTE">
+          <a href="../../../Edge/" class="md-footer__link md-footer__link--next" aria-label="Next: Edge">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                GraphSMOTE
+                Edge
               </div>
             </div>
             <div class="md-footer__button md-icon">

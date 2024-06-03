@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="RadiumStar KBS">
+        <meta name="description" content="Data-Centric Graph Data Augmentation">
       
       
         <meta name="author" content="RadiumStar">
@@ -39,9 +39,25 @@
 
 
     
-    
+     
       
     
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"],
+      ],
+    },
+  };
+</script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+></script>
+
     
       
         
@@ -861,7 +877,7 @@
 <p>motivation: 为了解决 GNNs 的过平滑问题，由于节点高度依赖于邻居从而易受攻击的弱鲁棒性问题，以及过拟合，难泛化的问题，作者提出了GRAND（Graph Random Neural Networks），从数据增强和一致性正则化的角度来解决上述问题</p>
 </li>
 <li>
-<p>methodology：随机将节点特征置零</p>
+<p>主要数据增强方法：随机将节点特征置零，以达到 Node Dropping 的效果</p>
 <ul>
 <li>
 <p>对图的节点特征 $\mathbf{X}$ 进行 $S$ 次增强，主要方法为 DropNode：首先对于每个节点，在伯努利分布中采样，之后应用到对应的节点特征上，即将某些节点的特征置零得到 $\tilde{\mathbf{X}}$ ，即实现了节点的特征去除，之后进行 $K$ 阶的随机传播，达到结合邻居信息的效果 $\overline{\mathbf{X}} = (\sum_{k= 0}^K \frac{1}{K+1}\hat{\mathbf{A}}^k) \tilde{X}$</p>

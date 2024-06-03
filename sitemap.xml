@@ -51,12 +51,32 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-adding/ImGAGN/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/AutoGCL/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/G2GNN/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/GRAND/</loc>
          <lastmod>2024-06-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/GraphCL/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/InfoGCL/</loc>
          <lastmod>2024-06-03</lastmod>
          <changefreq>daily</changefreq>
     </url>

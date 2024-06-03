@@ -12,26 +12,28 @@
         <meta name="author" content="RadiumStar">
       
       
-        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/">
+        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/InfoGCL/">
       
       
+        <link rel="prev" href="../G2GNN/">
       
-        <link rel="next" href="Node/">
+      
+        <link rel="next" href="../../node-adding/GraphENS/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
     
     
       
-        <title>Data-Centric Graph Data Augmentation</title>
+        <title>InfoGCL - Data-Centric Graph Data Augmentation</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e359304.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -52,7 +54,7 @@
     
       <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#data-centric-graph-data-augmentation" class="md-skip">
+        <a href="#infogcl" class="md-skip">
           Skip to content
         </a>
       
@@ -92,9 +94,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Data-Centric Graph Data Augmentation" class="md-header__button md-logo" aria-label="Data-Centric Graph Data Augmentation" data-md-component="logo">
+    <a href="../../.." title="Data-Centric Graph Data Augmentation" class="md-header__button md-logo" aria-label="Data-Centric Graph Data Augmentation" data-md-component="logo">
       
-  <img src="assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -111,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              InfoGCL
             
           </span>
         </div>
@@ -200,9 +202,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Data-Centric Graph Data Augmentation" class="md-nav__button md-logo" aria-label="Data-Centric Graph Data Augmentation" data-md-component="logo">
+    <a href="../../.." title="Data-Centric Graph Data Augmentation" class="md-nav__button md-logo" aria-label="Data-Centric Graph Data Augmentation" data-md-component="logo">
       
-  <img src="assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     Data-Centric Graph Data Augmentation
@@ -226,19 +228,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -247,7 +240,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -256,6 +248,8 @@
       
   
   
+    
+  
   
   
     
@@ -272,16 +266,16 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="Node/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -298,7 +292,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Node
@@ -311,8 +305,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -333,11 +329,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -351,7 +347,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             Node Dropping
@@ -365,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/GRAND/" class="md-nav__link">
+      <a href="../GRAND/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -386,7 +382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/GraphCL/" class="md-nav__link">
+      <a href="../GraphCL/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -407,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/JOAO/" class="md-nav__link">
+      <a href="../JOAO/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -428,7 +424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/MH-Aug/" class="md-nav__link">
+      <a href="../MH-Aug/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -449,7 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/AutoGCL/" class="md-nav__link">
+      <a href="../AutoGCL/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -470,7 +466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/G2GNN/" class="md-nav__link">
+      <a href="../G2GNN/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -488,10 +484,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="Node/node-dropping/InfoGCL/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -500,6 +505,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -565,7 +571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-adding/GraphENS/" class="md-nav__link">
+      <a href="../../node-adding/GraphENS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -586,7 +592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-adding/GraphMix/" class="md-nav__link">
+      <a href="../../node-adding/GraphMix/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -607,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-adding/GraphSMOTE/" class="md-nav__link">
+      <a href="../../node-adding/GraphSMOTE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -628,7 +634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-adding/ImGAGN/" class="md-nav__link">
+      <a href="../../node-adding/ImGAGN/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -682,7 +688,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="Edge/" class="md-nav__link ">
+            <a href="../../../Edge/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -735,7 +741,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="Subgraph/" class="md-nav__link ">
+            <a href="../../../Subgraph/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -788,7 +794,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="Label/" class="md-nav__link ">
+            <a href="../../../Label/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -841,7 +847,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="Feature/" class="md-nav__link ">
+            <a href="../../../Feature/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -876,7 +882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="tags/" class="md-nav__link">
+      <a href="../../../tags/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -896,7 +902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="about/" class="md-nav__link">
+      <a href="../../../about/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -942,7 +948,81 @@
                   
 
 
-<h1 id="data-centric-graph-data-augmentation">Data-Centric Graph Data Augmentation<a class="headerlink" href="#data-centric-graph-data-augmentation" title="Permanent link">&para;</a></h1>
+<h1 id="infogcl">InfoGCL<a class="headerlink" href="#infogcl" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><a href="https://proceedings.neurips.cc/paper_files/paper/2021/file/ff1e68e74c6b16a1a7b5d958b95e120c-Paper.pdf">InfoGCL: Information-Aware Graph Contrastive Learning</a></p>
+</blockquote>
+<ol>
+<li>
+<p><strong>motivation</strong>：目前大部分图对比学习框架都是针对特定数据集以及训练任务，缺乏一种可以从头构建自己的图对比学习框架的统一范式，即对于给定的图任务和图数据，构建对应的图对比学习框架，因此作者借助信息瓶颈，（Information Bottleneck）通过遵循信息瓶颈原则减少相互之间的信息对比部分作为优化目标</p>
+</li>
+<li>
+<p>主要增强方法: <img alt="InfoGCL" src="../../../assets/images/InfoGCL.png" /></p>
+<ul>
+<li>
+<p>augmentation：最优的增强目标为 </p>
+<div class="arithmatex">\[
+\begin{align}
+\left(\mathbf{v}_{i}^{*}, \mathbf{v}_{j}^{*}\right)&amp;=\underset{\mathbf{v}_{i}, \mathbf{v}_{j}}{\arg \min } I\left(\mathbf{v}_{i} ; \mathbf{v}_{j}\right) \\
+\text { s.t. } I\left(\mathbf{v}_{i} ; y\right)&amp;=I\left(\mathbf{v}_{j} ; y\right) \\
+I\left(\mathbf{v}_{i} ; y\right)&amp;=I(\mathcal{G} ; y)
+\end{align}
+\]</div>
+<p>即作者认为好的增强视图应该之间的共享互信息最小化，且共享信息只能与任务相关</p>
+<ul>
+<li>
+<p>node dropping：丢弃一些点（即相连的边）</p>
+</li>
+<li>
+<p>edge perturbation：增删边</p>
+</li>
+<li>
+<p>attribute masking：遮蔽掉部分属性</p>
+</li>
+<li>
+<p>subgraph sampling：采样子图</p>
+</li>
+</ul>
+</li>
+<li>
+<p>encoding：编码器可以任意 GNNs；作者认为一个视图的最优编码器生成的表示应该保留两个对比视图的所有共享信息，同时保留的信息都是与任务相关的，故优化目标是 </p>
+<p>$$
+f_i^* = \underset{f_i}{\arg\min}I(f_i(v_i^<em>); v_i<sup>*)\qquad\text{s.t.}I(f_i(v_i</sup></em>); v_j<sup>*)=I(v_i</sup><em>; v_j^</em>)
+$$  </p>
+<p>即最小化编码前后的视图，即编码后两个视图之间共享信息只能与任务相关</p>
+</li>
+<li>
+<p>representation contrasting: 优化目标：<span class="arithmatex">\((c_i^*, c_j^*) = \arg\min_{(c_i, c_j)} -I(c_i(z_i^*); c_j(z_j^*))\)</span> 即最大化最终表征的共享信息；作者总结了5种对比方式</p>
+<ul>
+<li>
+<p>global-global：图表征对比，都采用平均聚合</p>
+</li>
+<li>
+<p>local-global：节点表征和另外一个view的图表征进行对比</p>
+</li>
+<li>
+<p>local-local：都是节点表征进行对比</p>
+</li>
+<li>
+<p>multi-scale：图表征和另外一个view的中间表征进行比较</p>
+</li>
+<li>
+<p>hybrid：混合global-global和local-global；infoNCE</p>
+</li>
+<li>
+<p>loss: <span class="arithmatex">\(h\)</span> 是用来衡量两个表征的相似度 </p>
+<div class="arithmatex">\[
+\mathcal{L}_{\text{NCE} }=-\mathbb{E}\left[\log \frac{\exp \left(h\left(\mathbf{z}_{i, n}, \mathbf{z}_{j, n}\right)\right)}{\sum_{n^{\prime}=1}^{N} \exp \left(h\left(\mathbf{z}_{i, n}, \mathbf{z}_{j, n^{\prime}}\right)\right)}\right]
+\]</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>方法评价：通过分解为三个部分，统一了图对比学习的范式，且分析了每个部分的优化目标；分析了负样本不是必需的；提供了一个通用的图对比学习设计方案。</p>
+</li>
+</ol>
 
 
 
@@ -977,15 +1057,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../G2GNN/" class="md-footer__link md-footer__link--prev" aria-label="Previous: \(\text{G}^2\text{GNN}\)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                \(\text{G}^2\text{GNN}\)
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="Node/" class="md-footer__link md-footer__link--next" aria-label="Next: Node">
+          <a href="../../node-adding/GraphENS/" class="md-footer__link md-footer__link--next" aria-label="Next: GraphENS">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Node
+                GraphENS
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1023,12 +1119,12 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "navigation.indexes", "navigation.path", "navigation.top", "search.suggest", "content.code.copy", "content.code.select"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer", "navigation.indexes", "navigation.path", "navigation.top", "search.suggest", "content.code.copy", "content.code.select"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
       
-        <script src="javascripts/katex.js"></script>
+        <script src="../../../javascripts/katex.js"></script>
       
         <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
       

@@ -12,26 +12,28 @@
         <meta name="author" content="RadiumStar">
       
       
-        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/">
+        <link rel="canonical" href="https://radiumstar.github.io/data-centric-graph-data-augmentation.github.io/Node/node-dropping/G2GNN/">
       
       
+        <link rel="prev" href="../AutoGCL/">
       
-        <link rel="next" href="Node/">
+      
+        <link rel="next" href="../InfoGCL/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
     
     
       
-        <title>Data-Centric Graph Data Augmentation</title>
+        <title>\(\text{G}^2\text{GNN}\) - Data-Centric Graph Data Augmentation</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e359304.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -52,7 +54,7 @@
     
       <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#data-centric-graph-data-augmentation" class="md-skip">
+        <a href="#textg2textgnn" class="md-skip">
           Skip to content
         </a>
       
@@ -92,9 +94,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Data-Centric Graph Data Augmentation" class="md-header__button md-logo" aria-label="Data-Centric Graph Data Augmentation" data-md-component="logo">
+    <a href="../../.." title="Data-Centric Graph Data Augmentation" class="md-header__button md-logo" aria-label="Data-Centric Graph Data Augmentation" data-md-component="logo">
       
-  <img src="assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -111,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              \(\text{G}^2\text{GNN}\)
             
           </span>
         </div>
@@ -200,9 +202,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Data-Centric Graph Data Augmentation" class="md-nav__button md-logo" aria-label="Data-Centric Graph Data Augmentation" data-md-component="logo">
+    <a href="../../.." title="Data-Centric Graph Data Augmentation" class="md-nav__button md-logo" aria-label="Data-Centric Graph Data Augmentation" data-md-component="logo">
       
-  <img src="assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     Data-Centric Graph Data Augmentation
@@ -226,19 +228,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -247,7 +240,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -256,6 +248,8 @@
       
   
   
+    
+  
   
   
     
@@ -272,16 +266,16 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="Node/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -298,7 +292,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Node
@@ -311,8 +305,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -333,11 +329,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -351,7 +347,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             Node Dropping
@@ -365,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/GRAND/" class="md-nav__link">
+      <a href="../GRAND/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -386,7 +382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/GraphCL/" class="md-nav__link">
+      <a href="../GraphCL/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -407,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/JOAO/" class="md-nav__link">
+      <a href="../JOAO/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -428,7 +424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/MH-Aug/" class="md-nav__link">
+      <a href="../MH-Aug/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -449,7 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/AutoGCL/" class="md-nav__link">
+      <a href="../AutoGCL/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -467,10 +463,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="Node/node-dropping/G2GNN/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -479,6 +484,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -491,7 +497,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-dropping/InfoGCL/" class="md-nav__link">
+      <a href="../InfoGCL/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -565,7 +571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-adding/GraphENS/" class="md-nav__link">
+      <a href="../../node-adding/GraphENS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -586,7 +592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-adding/GraphMix/" class="md-nav__link">
+      <a href="../../node-adding/GraphMix/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -607,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-adding/GraphSMOTE/" class="md-nav__link">
+      <a href="../../node-adding/GraphSMOTE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -628,7 +634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Node/node-adding/ImGAGN/" class="md-nav__link">
+      <a href="../../node-adding/ImGAGN/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -682,7 +688,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="Edge/" class="md-nav__link ">
+            <a href="../../../Edge/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -735,7 +741,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="Subgraph/" class="md-nav__link ">
+            <a href="../../../Subgraph/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -788,7 +794,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="Label/" class="md-nav__link ">
+            <a href="../../../Label/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -841,7 +847,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="Feature/" class="md-nav__link ">
+            <a href="../../../Feature/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -876,7 +882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="tags/" class="md-nav__link">
+      <a href="../../../tags/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -896,7 +902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="about/" class="md-nav__link">
+      <a href="../../../about/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -942,7 +948,43 @@
                   
 
 
-<h1 id="data-centric-graph-data-augmentation">Data-Centric Graph Data Augmentation<a class="headerlink" href="#data-centric-graph-data-augmentation" title="Permanent link">&para;</a></h1>
+<h1 id="textg2textgnn"><span class="arithmatex">\(\text{G}^2\text{GNN}\)</span><a class="headerlink" href="#textg2textgnn" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><a href="https://dl.acm.org/doi/pdf/10.1145/3511808.3557356">Imbalanced Graph Classification via Graph-of-Graph Neural Networks</a></p>
+</blockquote>
+<ol>
+<li>
+<p>motivation: 目前的样本不平衡问题的解决集中于节点分类的场景，而图分类的十分少，因此作者通过全局GoG和局部增强的方法实现图级别的不平衡问题的解决。</p>
+</li>
+<li>
+<p>主要增强方法: 作者在局部增强中采用节点特征置零的增强手段，实际上也是一种 node dropping 的方法 <img alt="G2GNN" src="../../../assets/images/G2GNN.png" /></p>
+</li>
+<li>global 增强: 本质上是通过全局传播从相邻图中为少数类图获得了额外的标签信息<ul>
+<li>通过任意一种 GNN encoder （作者采用GIN）得到图级别的表征</li>
+<li>之后为每个图寻找KNN近邻，并构造GoG（Graph of Graph）：本质上将图视为节点，为他们根据拓扑相似性 <span class="arithmatex">\(S = \phi(G_i, G_j)\)</span> 建立边的联系，其中 <span class="arithmatex">\(\phi\)</span> 为核函数，作者采用了最短路径核函数，从而构造了一个KNN GoG</li>
+<li>传播聚合邻居图信息：在得到以图为节点的GoG，通过GCN进行节点间信息传播聚合邻居图信息</li>
+</ul>
+</li>
+<li>
+<p>local 增强: 对于少数图进行过采样后，假设一个图过采样为 <span class="arithmatex">\(T\)</span> 个图，对这 <span class="arithmatex">\(T\)</span> 个图采取下列增强手段之一得到 <span class="arithmatex">\(T\)</span> 个增强图，加强对少数图的泛化能力</p>
+<ul>
+<li>edge removing: 对于每个图，随机删除一组子边</li>
+<li>node feature masking：对于每个图，随机将某些节点的 <strong>整个</strong> 特征置零（作者发现全部置零比部分特征维度置零带来的随机增强获得的性能更好）</li>
+<li>
+<p>self-consistency regularization：作者采用了自一致性正则化，优化每个图的增强图之间的预测的一致性。首先用表征的预测分布的平均值得到中心表征 <span class="arithmatex">\(\hat{P}\)</span>，然后按每一维度每个增强图锐化 <span class="arithmatex">\(\bar{P}_{ij}=(\hat{P}_{ij}^\tau)/\sum_{c=1}^C(\hat{P}_{ic})^\tau\)</span></p>
+<div class="arithmatex">\[
+\mathcal{L}_i^{self} = \frac{1}{T} \sum_{t = 1} ^ T\parallel\bar{P}_i - \tilde{P}_i^t\parallel_2
+\]</div>
+</li>
+</ul>
+</li>
+<li>
+<p>总体损失：<img alt="loss" src="../../../assets/images/G2GNNloss.png" /></p>
+</li>
+<li>
+<p>方法评价: 通过全局和局部两个角度加强了少数样本的过采样后模型的泛化能力，解决了不平衡样本的图分类问题，后续研究可以通过依概率混合的方式进行 edge removing 或者 feature masking 的数据增强实验来探究拓扑级和特征级的影响程度</p>
+</li>
+</ol>
 
 
 
@@ -977,15 +1019,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../AutoGCL/" class="md-footer__link md-footer__link--prev" aria-label="Previous: AutoGCL">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                AutoGCL
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="Node/" class="md-footer__link md-footer__link--next" aria-label="Next: Node">
+          <a href="../InfoGCL/" class="md-footer__link md-footer__link--next" aria-label="Next: InfoGCL">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Node
+                InfoGCL
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1023,12 +1081,12 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "navigation.indexes", "navigation.path", "navigation.top", "search.suggest", "content.code.copy", "content.code.select"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer", "navigation.indexes", "navigation.path", "navigation.top", "search.suggest", "content.code.copy", "content.code.select"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
       
-        <script src="javascripts/katex.js"></script>
+        <script src="../../../javascripts/katex.js"></script>
       
         <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
       
